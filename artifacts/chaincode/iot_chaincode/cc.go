@@ -149,10 +149,11 @@ func (s *SmartContract) detectSCFault(stub shim.ChaincodeStubInterface, sensorID
 
 	var response []Response
 	counter := 0
+	size := 0
 	// b := `[{"TxId":"0d6157c800fbe1904b63a7fe81a096f65b91d6c426da74c3299de9f9a70e1dbc", "Value":{"sensorID":"3","temp":" ","time":" ","outlier":""}, "Timestamp":"2020-04-14 22:57:16.602 +0000 UTC", "IsDelete":"false"},{"TxId":"b0c042787d8ea0083915c0e5c8cae48d09fb8b839bb6d9e5b13db9892d6e6824", "Value":{"sensorID":"3","temp":"21.13","time":"04/15/2020, 10:47:40 AM","outlier":""}, "Timestamp":"2020-04-15 07:47:40.386 +0000 UTC", "IsDelete":"false"},{"TxId":"2e37d9feb6460e9b400b410f11e678df5bad8bea8ada1c1ebe68c00854e692cc", "Value":{"sensorID":"3","temp":"20.12","time":"04/15/2020, 10:47:45 AM","outlier":""}, "Timestamp":"2020-04-15 07:47:45.282 +0000 UTC", "IsDelete":"false"}]`
 	var sensorParam []string
 	sensorParam = append(sensorParam, "0")
-	sensorParam = append(sensorParam, "10")
+	sensorParam = append(sensorParam, "999")
 
 	b := s.getAllStates(stub, sensorParam).Payload
 
@@ -163,6 +164,7 @@ func (s *SmartContract) detectSCFault(stub shim.ChaincodeStubInterface, sensorID
 	}
 
 	for _, element := range response {
+		size++
 		if element.Value.SensorID == sensorID {
 			continue
 		}
@@ -185,7 +187,7 @@ func (s *SmartContract) detectSCFault(stub shim.ChaincodeStubInterface, sensorID
 		return "100%"
 	}
 
-	return fmt.Sprintf("%.2f", (float64(counter)/(float64(len(response))-float64(1)))*float64(100)) + "%"
+	return fmt.Sprintf("%.2f", (float64(counter)/(float64(size)-float64(1)))*float64(100)) + "%"
 
 }
 
