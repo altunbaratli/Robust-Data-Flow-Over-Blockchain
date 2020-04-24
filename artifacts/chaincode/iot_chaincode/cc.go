@@ -18,10 +18,12 @@ type SmartContract struct {
 
 //Value
 type Value struct {
-	SensorID string `json:"sensorID"`
-	Temp     string `json:"temp"`
-	Time     string `json:"time"`
-	Outlier  string `json:"outlier"`
+	SensorID     string `json:"sensorID"`
+	Temp         string `json:"temp"`
+	Time         string `json:"time"`
+	Outlier      string `json:"outlier"`
+	StuckatFault string `json:"stuckatfault"`
+	SCFault      string `json:"scfault"`
 }
 
 func main() {
@@ -45,6 +47,13 @@ func stdDev(numbers []float64, mean float64) float64 {
 	}
 	variance := total / float64(len(numbers)-1)
 	return math.Sqrt(variance)
+}
+
+func Abs(x float64) float64 {
+	if x < 0 {
+		return -1 * x
+	}
+	return x
 }
 
 func (s *SmartContract) Init(stub shim.ChaincodeStubInterface) peer.Response {
@@ -84,6 +93,100 @@ func (s *SmartContract) Invoke(stub shim.ChaincodeStubInterface) peer.Response {
 	}
 
 	return shim.Success(nil)
+}
+
+func (s *SmartContract) detectStuckatFault(stub shim.ChaincodeStubInterface, sensorID string, measurement float64) string {
+	type Response struct {
+		TxId      string
+		Value     Value
+		Timestamp string
+		IsDelete  string
+	}
+
+	var response []Response
+	counter := 0
+	// b := `[{"TxId":"0d6157c800fbe1904b63a7fe81a096f65b91d6c426da74c3299de9f9a70e1dbc", "Value":{"sensorID":"3","temp":" ","time":" ","outlier":""}, "Timestamp":"2020-04-14 22:57:16.602 +0000 UTC", "IsDelete":"false"},{"TxId":"b0c042787d8ea0083915c0e5c8cae48d09fb8b839bb6d9e5b13db9892d6e6824", "Value":{"sensorID":"3","temp":"21.13","time":"04/15/2020, 10:47:40 AM","outlier":""}, "Timestamp":"2020-04-15 07:47:40.386 +0000 UTC", "IsDelete":"false"},{"TxId":"2e37d9feb6460e9b400b410f11e678df5bad8bea8ada1c1ebe68c00854e692cc", "Value":{"sensorID":"3","temp":"20.12","time":"04/15/2020, 10:47:45 AM","outlier":""}, "Timestamp":"2020-04-15 07:47:45.282 +0000 UTC", "IsDelete":"false"}]`
+	var temps []float64
+	var sensorParam []string
+	sensorParam = append(sensorParam, sensorID)
+	b := s.getHistory(stub, sensorParam).Payload
+
+	json.Unmarshal([]byte(b), &response)
+
+	for _, element := range response {
+		if (element.Value.Temp == "") || (element.Value.Temp == " ") {
+			continue
+		}
+		if floatedTemp, err := strconv.ParseFloat(element.Value.Temp, 64); err == nil {
+			temps = append(temps, floatedTemp)
+		} else {
+			fmt.Println(err)
+		}
+	}
+	if len(temps) == 0 {
+		return "0%"
+	}
+
+	for i := len(temps) - 1; i >= 0; i-- {
+		if temps[i] == measurement {
+			counter++
+		} else {
+			break
+		}
+		if counter == 10 {
+			break
+		}
+	}
+
+	return strconv.Itoa(counter*10) + "%"
+
+}
+
+func (s *SmartContract) detectSCFault(stub shim.ChaincodeStubInterface, sensorID string, measurement float64) string {
+	type Response struct {
+		Value Value
+	}
+
+	var response []Response
+	counter := 0
+	// b := `[{"TxId":"0d6157c800fbe1904b63a7fe81a096f65b91d6c426da74c3299de9f9a70e1dbc", "Value":{"sensorID":"3","temp":" ","time":" ","outlier":""}, "Timestamp":"2020-04-14 22:57:16.602 +0000 UTC", "IsDelete":"false"},{"TxId":"b0c042787d8ea0083915c0e5c8cae48d09fb8b839bb6d9e5b13db9892d6e6824", "Value":{"sensorID":"3","temp":"21.13","time":"04/15/2020, 10:47:40 AM","outlier":""}, "Timestamp":"2020-04-15 07:47:40.386 +0000 UTC", "IsDelete":"false"},{"TxId":"2e37d9feb6460e9b400b410f11e678df5bad8bea8ada1c1ebe68c00854e692cc", "Value":{"sensorID":"3","temp":"20.12","time":"04/15/2020, 10:47:45 AM","outlier":""}, "Timestamp":"2020-04-15 07:47:45.282 +0000 UTC", "IsDelete":"false"}]`
+	var sensorParam []string
+	sensorParam = append(sensorParam, "0")
+	sensorParam = append(sensorParam, "10")
+
+	b := s.getAllStates(stub, sensorParam).Payload
+
+	json.Unmarshal([]byte(b), &response)
+
+	if response == nil {
+		return "-"
+	}
+
+	for _, element := range response {
+		if element.Value.SensorID == sensorID {
+			continue
+		}
+		if (element.Value.Temp == "") || (element.Value.Temp == " ") {
+			continue
+		}
+		if floatedTemp, err := strconv.ParseFloat(element.Value.Temp, 64); err == nil {
+			if Abs(measurement-floatedTemp) > float64(2) {
+				counter++
+			}
+		} else {
+			fmt.Println(err)
+		}
+	}
+	if counter == 0 {
+		return "0%"
+	}
+
+	if counter > 10 {
+		return "100%"
+	}
+
+	return strconv.Itoa(counter/(len(response)-1)*100) + "%"
+
 }
 
 func (s *SmartContract) detectOutlier(stub shim.ChaincodeStubInterface, sensorID string, measurement float64) string {
@@ -165,7 +268,10 @@ func (s *SmartContract) addTemp(stub shim.ChaincodeStubInterface, args []string)
 		fmt.Println(err)
 	} else {
 		value.Outlier = s.detectOutlier(stub, sensorID, ms)
+		value.StuckatFault = s.detectStuckatFault(stub, sensorID, ms)
+		value.SCFault = s.detectSCFault(stub, sensorID, ms)
 	}
+
 	fmt.Println(value)
 	valueByBytes, _ := json.Marshal(value)
 	stub.PutState(sensorID, valueByBytes)
