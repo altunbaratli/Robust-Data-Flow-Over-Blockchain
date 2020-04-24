@@ -158,7 +158,7 @@ func (s *SmartContract) detectSCFault(stub shim.ChaincodeStubInterface, sensorID
 
 	json.Unmarshal([]byte(b), &response)
 
-	if response == nil {
+	if (response == nil) || (len(response) == 0) {
 		return "-"
 	}
 
