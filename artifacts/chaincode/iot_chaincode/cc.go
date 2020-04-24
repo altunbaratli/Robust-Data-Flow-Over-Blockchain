@@ -185,7 +185,7 @@ func (s *SmartContract) detectSCFault(stub shim.ChaincodeStubInterface, sensorID
 		return "100%"
 	}
 
-	return strconv.Itoa(counter/(len(response)-1)*100) + "%"
+	return fmt.Sprintf("%.2f", (float64(counter)/(float64(len(response))-float64(1)))*float64(100)) + "%"
 
 }
 
