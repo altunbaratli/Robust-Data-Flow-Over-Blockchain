@@ -1,0 +1,68 @@
+%----------------------------------------------------------------------------
+\chapter{\bevezetes}
+%----------------------------------------------------------------------------
+
+We are surrounded by complex systems that themselves are interconnected.
+These networks consist of considerably many stakeholders.
+Cell phone network has billions of stations around the world.
+Our brain depends on the connection among millions of neurons and their communication.
+Today's trade market highly depends on centralized financial technology hubs.
+
+If we consider the growth of network complexity to be linear, the cost of interaction with them increases exponentially.
+As complex systems play a principal role in our society, economy, and communication, network science, prediction algorithms are the significant challenges of the twenty-first century.
+
+The complex systems are living dynamically, and interactions among its players happen very often.
+One indication of networks is interaction encode among its components\cite{barabasi2016network}:
+
+\begin{enumerate}
+  \item The wiring diagram of connections among neurons of the brain is called \textit{neural network} and helps us understand how our brain functions.
+  \item The relative, professional, and friendship connections among people are called \textit{social network} and help us analyze the knowledge distribution, behavioral prediction, etc.
+  \item The cellular or wire connections among electronic devices, \textit{communication network} defines the connectivity quality in our modern life.
+  \item \textit{Trade networks} enable people to exchange their products and stocks, increased the material prosperity after World War II.
+\end{enumerate}
+
+A credit card is selected as the 99th object in the \textit{History of the World in 100 Object} exhibit at British Museum.
+This card is a product of rich network interconnections in the modern world economy.
+It was issued in the United Arab Emirates by the London based Chinese bank -- HSBC.
+The bank card makes transactions over an American provider VISA and applies Islamic rule values -- no interest policy\cite{barabasi2016network}.
+
+The most valuable companies in the twenty-first century are heavily dependent on technology and evaluated by the complexity of owned networks.
+Google, Facebook, Twitter are the most notable examples of their social network business.
+Social network insights give company relevant advertisement target groups based on their interactions.
+Commercial interest incentivizes companies to invest more in scientific research in network science.
+
+As highly connected networks allow financial institutions to make, more transactions bring new challenges with themselves.
+The easier it is easy to make a money transfer, the more vulnerable it is to potential exploits.
+Therefore, financial fraud requires much more attention than before.
+To develop better surveillance in transaction networks, scientists look at several database topologies.
+Recent studies show that graph database engines gain more reputation in this field.
+Graph nature of database can detect cyclic relations, connectivity-based pattern-finding computations faster than relational databases\cite{EIFREM20196}.
+
+In this work to write queries for financial fraud scenarios, we worked on three graph database engine technologies:
+
+\begin{enumerate}
+	\item \textbf{Neo4j}
+	\begin{itemize}
+		\item A Java based native graph database
+		\item Works with the \textit{Cypher} query language
+	\end{itemize}
+	\item \textbf{TigerGraph}
+	\begin{itemize}
+		\item Highly scalable and \textit{Massive Parallel Processing (MPP)} based graph database
+		\item Works with the procedural SQL-like \textit{GSQL} query language 
+	\end{itemize}
+	\item \textbf{Oracle PGX}
+	\begin{itemize}
+		\item A parallel and in-memory graph analytical framework
+		\item Works with SQL-like query language PGQL for pattern-matching subgraphs
+		\item Can be used as a library embedded in a Java application
+	\end{itemize}
+\end{enumerate}
+
+The following chapter covers the required fundamental knowledge in graph databases and engine concepts we have used in our work.
+In the third chapter, three financial fraud scenarios are discussed in detail, which has been simulated in graph queries later.
+The fourth chapter is devoted to graph database technologies, query structure, and algorithm design we have used.
+In the fifth and sixth chapters, fraud detection system implementations are discussed and benchmarked in static and dynamic modes.
+In our experiment, two different sizes of datasets have been used, small and large. The small dataset consists of about 50k vertices and 100k edges, while the large one 500k vertices and two millions of edges.
+The seventh chapter is devoted to the literature review of similar fraud detection studies in graph databases.
+The last chapter concludes our work's contribution, categorized descriptions of each graph database used in practice, and future work direction possibilities.

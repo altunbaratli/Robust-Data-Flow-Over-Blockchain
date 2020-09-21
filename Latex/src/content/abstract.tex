@@ -1,0 +1,63 @@
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\selecthungarian
+
+%----------------------------------------------------------------------------
+% Abstract in Hungarian
+%----------------------------------------------------------------------------
+\chapter*{Kivonat}\addcontentsline{toc}{chapter}{Kivonat}
+
+A pénzügyi hálózatok méretének növekedésével a pénzügyi csalások folyamatos vizsgálata egyre nagyobb számítási költséggel jár, holott az alacsony késleltetés biztosítása és sok felhasználó egyidejű kiszolgálása alapvető fontosságúak ebben a kontextusban.
+A közelmúltban több próbálkozás történt hatékony csalásdetekciós szolgáltatások készítésére, melyek az adatbázis-kezelő rendszerek új generációját, ún. gráfadatbázisokat használtak.
+Ezen rendszerek újszerűsége miatt jelenleg kevés ismerettel rendelkezünk azzal kapcsolatban, hogy pontosan hogyan teljesítenek csalásdetekciós terhelési profilokon és milyen optimalizációk alkalmazhatók rajtuk.
+
+A dolgozatban három új gráfadatbázis-kezelő rendszert hasonlítok össze különböző csalásdetekciós esettanulmányokon és különböző méretű adathalmazokon.
+A relációs adatbázis-kezelőkkel összevetve a gráfadatbázisok egyszerűbben használhatók esetén bizonyos gráfminták megkeresésére.
+A dolgozatban a Neo4j, TigerGraph és Oracle PGX gráfadatbázis rendszereket használtam a kísérletekben szereplő adathalmazok feldolgozására és lekérdezésére.
+A munka fókuszában három csalási séma azonosítása állt:
+"smurfing" tranzakciók,
+mobilbankban végzett pénzmosás jellegű műveletek és
+az e-kereskedelmi platformokon (mint az Amazon és az eBay) jelenlévő eladók számára túlzottan pozitív értékelések hamisítása.
+
+Mivel az adathalmazok hozzáférhetőségét a pénzügyi szervezetek bizalmas adatként kezelik, a teljesítménymérésekhez szintetikus adatgenerátort készítettem.
+A nagyobb generált adathalmaz 500 ezer csomópontból és 1,2 millió élből áll.
+A csalásdetekciós problémát gráflekérdezésekként fogalmaztam meg, majd elvégeztem a teljesítménykiértékelést a három adatbázis-kezelő rendszeren. A mérések alapján az implementációk már a relatív kis méretű adathalmaznál is komoly skálázhatósági problémákat mutattak.
+A probléma megoldására egy dinamikus csalásdetekciós rendszert terveztem inkrementális nézetkarbantartási technikák alkalmazásával.
+A dinamikus lekérdezéseket a Neo4j rendszer Cypher lekérdezőnyelvén valósítottam meg triggerek segítségével. A mérések alapján ez a dinamikus megközelítés akár 180-szoros javulást is hozhat egyes lekérdezések futásidejében.
+
+
+
+\vfill
+\selectenglish
+
+%----------------------------------------------------------------------------
+% Abstract in English
+%----------------------------------------------------------------------------
+\chapter*{Abstract}\addcontentsline{toc}{chapter}{Abstract}
+
+As financial networks grow ever more extensive, the cost of fraudulent transaction inspection becomes computationally expensive.
+Maintaining low latency and serving a large number of customers is essential in this context.
+Recent attempts to provide efficient fraud detection services have employed a new generation of database management systems called graph databases.
+However, due to the novelty of such systems, little is known about how they perform on such workloads and what type of optimizations they lend themselves to.
+
+In this thesis, we worked with three novel graph database management systems to compare them in different fraud scenarios and dataset scales.
+In comparison with traditional relational database systems, graph databases are easier to use for finding particular graph pattern matches.
+We used the Neo4j, TigerGraph, and Oracle PGX graph database engines to process and query datasets in our experiments.
+Our focus financial fraud scenarios include
+smurfing transactions,
+mobile banking money laundering, and
+biased reviews in e-commerce platforms such as Amazon or eBay.
+Due to the challenges of financial institutions' confidentiality policies, we developed a synthetic data generator. The generated dataset consists of up 500k vertex and 1.2M edge entries.
+
+We formulated the fraud detection problems as graph queries and benchmarked them on the three database management systems. Even at this relatively small scale, the implementations exhibited significant scalability limits.
+To mitigate this problem, we designed dynamic fraud detection queries by adopting incremental view maintenance techniques.
+We formulated the dynamic fraud detection queries in Neo4j's Cypher query language and implemented a solution with triggers.
+We observed promising performance gains up to 180 times during the experiments.
+
+\vfill
+\selectthesislanguage
+
+\newcounter{romanPage}
+\setcounter{romanPage}{\value{page}}
+\stepcounter{romanPage}

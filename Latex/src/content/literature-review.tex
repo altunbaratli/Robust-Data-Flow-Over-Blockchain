@@ -1,0 +1,136 @@
+%----------------------------------------------------------------------------
+\chapter{Literature review}
+%----------------------------------------------------------------------------
+
+In comparison with our work, most of the other research works on fraud detection are based on machine learning algorithms.
+This chapter will discuss recent publications with their key features, domains, and technologies they covered.
+
+%----------------------------------------------------------------------------
+\section{RUDOLF}
+%----------------------------------------------------------------------------
+
+As many of today's machine learning techniques are based on manually crafted fraud scenarios and rules, there is a need to refine them over time.
+With the growing scale of internet transactions, the market is getting more accessible to fraud actors.
+They introduce new crime patterns every day, and banking systems are always in competition with them. 
+Machine learning algorithms need to be optimized day by day to cope with new scenarios, and more domain experts are involved in it.
+To maintain the continuous development of fraud prevention rules, developers try to optimize them for computational effectiveness.
+RUDOLF is a software system developed to help rule-makers to generalize the whole algorithm (consisting of sophisticated rules) with refined one~\cite{DBLP:conf/edbt/MiloNT18}.
+The best candidate adaptation is an NP-hard problem, but they offer the PTIME heuristic algorithms to refine the existing rules in interaction with domain experts.
+The system user can work with the rule optimization tool to get the desired results.
+
+%----------------------------------------------------------------------------
+\section{Graph streaming systems}
+%----------------------------------------------------------------------------
+
+\emph{Graph databases} are designed to handle datasets with complex and rich properties.
+Edge and vertices can be modeled with different data types, numbers, texts, images, arrays, and more.
+Graph databases work under ACID properties for transactional support.
+Such systems also support complex pattern matching to satisfy different business intelligence scenarios.
+In contrast, \emph{graph streaming systems} work with simple data structures.
+There is no standard ACID support in such systems, and graph updates mainly focus on lightweight single edge insert and delete commits.
+They designed to handle the enormous velocity of data updates, rather than arbitrary pattern matching query support~\cite{DBLP:journals/corr/abs-1912-12740}.
+
+Based on the characteristics of dynamic graph databases, they cannot handle our fraud scenarios alone. 
+Several technologies provide both streaming framework and graph database properties and can be used as an alternative platform for our Neo4j-based implementation.
+
+\paragraph{Concerto}~\cite{10.1007/978-3-642-45065-5_15}
+Concerto is a graph store based on distributed, in-memory data structures.
+It provides essential properties from streaming services and graph databases, such as significant efficient updates, real-time queries, triggers, and ACID properties.
+Graph objects are stored in a global address space provided by Sinfonia~\cite{DBLP:journals/tocs/AguileraMSVK09}, a distributed shared memory system.
+Simfonia guarantees the ACID properties to the platform while hiding the complexity that arises during the process of concurrency failures.
+Data structures in Concerto can also hold arbitrary properties.
+
+\paragraph{ZipG}~\cite{DBLP:conf/sigmod/KhandelwalYY0S17}
+As the name suggests, the key feature of this service is the capability to query compressed graph data.
+The service works with the memory-efficient compressed representation of input graph data.
+ZipG works with two files, which store vertices and edges separately.
+A row in the vertex file stores the properties related to one vertex.
+In the edge file, a single entry holds all single type edges connected to the vertex and properties related to these edges.
+Compression is handled by Succinct~\cite{DBLP:conf/nsdi/AgarwalKS15}, a distributed data storage solution.
+It supports random access and arbitrary substring search directly on compressed unstructured data and key-value pairs.
+The updates are collected in one log store until the threshold is filled, then compressed into immutable representations.
+The pointers are managed in an updated continuous structure, and the lookup will not be executed on each query.
+In comparison with traditional graph databases, ZipG does not support strict consistency.
+
+%----------------------------------------------------------------------------
+\section{Graphflow}
+%----------------------------------------------------------------------------
+
+Graphflow automates the continuous query processing with introducing their new Generic Join, and Delta Generic Join algorithms~\cite{DBLP:conf/sigmod/KankanamgeSMCS17}.
+The main goal is to gain efficiency in large graph database transactions with finding the subgraph queries continuously.
+The platform is a single node in-memory system implemented in Java.
+It supports the property graph data model and the Cypher\texttt{++} language, an extension of Cypher, along with subgraph-condition-action triggers.
+The user needs to define the subgraph conditions they want to detect in continuously when new transactional commits happen in the graph database.
+During the new transaction commit Graphflow's One-time Query Processor (\textit{OQP}) stores the in-memory graph in three versions:
+\begin{itemize}
+    \item Current: Version before the transaction
+    \item Delta: Transaction updates
+    \item New: Version after the transaction commit
+\end{itemize}
+After graph store \textit{OQP} notifies the Continuous Query Processor (\textit{CPQ}) about the updates to check subgraphs with triggers.
+If triggers found the desired subgraph pattern, they will perform the predefined actions.
+Plans for the checking triggers are built using the Delta Generic Join algorithm.
+
+%----------------------------------------------------------------------------
+\section{The survey on the ubiquity of large graphs}
+%----------------------------------------------------------------------------
+
+Researches from the University of Waterloo published an extended survey on large database technologies from academic and industry users~\cite{DBLP:journals/pvldb/SahuMSLO17}. 
+The survey combines the results in different categories, dataset scale, computation methods, types of graphs, and challenges users face.
+There are interesting findings in the results, which also motivate the work presented in this thesis.
+The survey shows that more than the quarter of the participants are using 100GB and more (in uncompressed graph size).
+Most of the graph changes are changing in dynamic fashion, rather than in static and streaming setups.
+
+The subgraph matching computation methods used in our implementation are among the most popular graph computations performed by users.
+Additionally, nearly half of the participants are using incremental or streaming computations on their graphs.
+Graph database systems, like Neo4j, OrientDB, TitanDB are the most popular software tools to query and perform computations.
+Scalability methods, software techniques to compute large graphs remain the most pressing challenge faced by participants.
+
+Triggers were in the requested capabilities from their using graph database systems.
+System developers need to perform reactive actions due to the database changes, such as vertex addition or node updates.
+Different types of bypass methods can be reduced with event trigger functionalities.
+Some of the systems support trigger functionality and our work with the Neo4j APOC library is an excellent example of that.
+
+In the application categorization part, fraud and threat detection are ranked in the third place.
+They interviewed four applications from the Alibaba online store and one consultant to a large financial institution.
+The applications are also categorized into two, searching for a subgraph pattern and graph visualization.
+Two of the Alibaba cases are similar to our fraud cases, bipartite transaction patterns with biased reviews and cycle patterns with money laundering cases.
+In comparison with a bipartite pattern, the \emph{biased reviews} query also aggregates the review average values.
+
+%----------------------------------------------------------------------------
+\section{Real time cycle detection}
+%----------------------------------------------------------------------------
+
+One of the real-time cycle detection systems in large and dynamic graphs is used in Alibaba systems and discussed in one study~\cite{DBLP:journals/pvldb/QiuCQPZLZ18}.
+They use their own \textbf{GraphS} system to process the dynamic graph with hundreds of millions of edges and vertices with highly efficient algorithms.
+In comparison with alternative graph processing frameworks, like Pregel~\cite{10.1145/1807167.1807184} and GraphX~\cite{DBLP:conf/osdi/GonzalezXDCFS14} which are also capable of querying the large scale graphs at high performance, but \textbf{GraphS} promises much lower latency than others.
+The system is capable of processing the pattern matching queries at a peak rate of tens of thousands of edge updates per second under the 20 milliseconds latency.
+They proposed a new hot point-based indexing method applied to the certain subgraphs to balance the cost and efficiency.
+During the dynamic updates, the system continually updates the hot point indexes.
+Additionally, queries evaluate the constrained cycles concurrently, which guarantees fault-tolerant system throughput.
+
+In action, when a transaction is committed to the graph, the hot point indexing is computed in the current snapshot.
+The index group holds the smaller and required parameters of the original graph.
+The paths are ordered in the hash maps sorted by length.
+If incoming edge commits do not cause the satisfying constrained cycle to use the hot point index, its result is updated at the hot point index and output immediately. 
+
+%----------------------------------------------------------------------------
+\section{Certified Graph View Maintenance with Regular Datalog}
+%----------------------------------------------------------------------------
+
+There is a study about mechanically-certified engine development for the fine-grained incremental view maintenance of graph databases using theorem proving techniques~\cite{DBLP:journals/tplp/BonifatiDA18}.
+They used Coq proof assistant\footnote{\url{https://coq.inria.fr/}} to develop the theories for Regular Datalog language and evaluate the engine itself.
+Regular Datalog (RD) is a fragment of non-recursive Datalog, developed to identify a suitable graph query with balancing expressivity and tractability~\cite{DBLP:journals/mst/ReutterRV17}.
+It can express complex navigational queries between nodes, with transitive closure as a native operator.
+In a development process, they first formalized the syntax and semantics of Regular Queries in Coq, then implemented the logic for incremental RD maintenance in Coq's programming language Gallina.
+To verify the engine's soundness, i.e. that it computes incremental view updates correctly, the proof is beased on two key properties, stratification and incrementality.
+
+There are two fraud detection scenarios discussed in the example applications of RD queries.
+In one case, a regular expression is used to detect the money laundering case by introducing monitor and accredit vertices in the graph.
+The transaction is marked as secured when it transferred from $X$ to $Y$ occurs if $Y$ is accredited by $X$, and if $X$ ensures a connection and transfers to $Y$.
+There should also be a central entity, $Z$, who monitors the chain of intermediaries of transfer from $X$ to $Y$ and accredited $X$.
+The transaction is marked fraudulent if it does not satisfy with the mentioned rules.
+
+In another case, RD program handles the incremental delta-join maintenance problem, such as a fraud that is detectable or not.
+There should exist another entity, $Z$, that monitors both of $X$ and $Y$ to determine whether susceptible transactions are detectable.
+The engine does the main job when the graph accepts a new update, and delta queries are computed automatically for each commit.

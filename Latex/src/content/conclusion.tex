@@ -1,0 +1,51 @@
+\chapter{Summary}
+
+The main output of this work was an efficient graph database implementation to detect the fraud scenarios, and we believe our achieved benchmarks met the goal.
+Some of the matching patterns proved hard to query with the basic static graph processing techniques and even challenging to implement in the massively parallel computation model.
+The efficiency of the \emph{incremental view maintenance} (IVM) techniques was observed during our experiments; up to 180 times speedup was achieved.
+
+In general, we analyzed the three modern graph systems and categorized them with pros and cons. 
+
+\begin{itemize}
+  \item \textbf{Neo4j}
+ Neo4j provides clear and rich documentation for all products and has a large community.
+  Cypher syntax is intuitive to design queries, and the learning rate is high.
+  The built-in web application is useful to write queries and visualize the data in different forms.
+  Additionally, the APOC library of the Neo4j platform has a wide variety of predefined functions, and IVM support implementation in our graph system was remarkably straightforward.  
+  The only disadvantage of the Neo4j we experienced during our work is a slow data import in the web dashboard.
+  This problem is bypassed using a command-line tool they provided, \texttt{neo4j-admin}.
+  \item \textbf{TigerGraph}
+ Tigergraph has an easy to follow documentation, but it is not as rich as Neo4j.
+  The configurable massively parallel processing (MPP) methods add extra value to the system.
+  Skilled developers can get a significant speed-up in the graph processing applications.
+  However, the system is not supported in Windows and macOS natively, and virtualized containers are the best place to set up.
+  \item \textbf{Oracle PGX}
+  In the graph processing field, its elegant query language GSQL and natively supported Java API have a promising future in the graph processing field.
+  Even though the system is still under an active development process, in large datasets, the system is performed much better than Neo4j.
+  The missing graphical user interface (GUI) and challenging documentation make technology less attractive than others.
+\end{itemize}
+
+\paragraph{Contribution}
+
+The following list gives a general overview of our contribution to this work:
+
+\begin{itemize}
+  \item Fraud cases are collected in three scenarios with their graph schema models and general process workflows.
+  \item The fraud detection of each scenario is implemented in three different database engines. 
+  The queries in Cypher and PGQL were similar, but GSQL implementation took additional parallelization algorithm optimization.
+  \item IVM support can be implemented in the Neo4j database using built-in APOC library methods. Event-based triggers help us to run procedures along the transaction commits.
+  \item A monitoring web system is developed to inject and observe the instant fraud notifications from the server.
+  \item In the end, main performance benchmarks were measured based on query execution time, both for static and dynamic implementations.
+\end{itemize}
+
+\paragraph{Future work}
+
+There is always a way to improve software products. In our work can also be continued to develop in the following aspects: 
+
+\begin{itemize}
+  \item Our work is implemented only on graph database engines, as future work, fraud detection queries can also be implemented in relational databases and benchmarked against the graph ones.
+  \item The currently used data generator works in a static model; it could be automated to generate natural data inputs continuously.
+  \item Machine learning methods can be applied to decide which transactions should be eliminated automatically to make our system more responsive and resistant to the new type of fraud transaction streams.
+  To achieve such a reactive behavior, a newly introduced gap time approach might help us.
+  A semi-supervised machine learning algorithm cannot flag transactions as fraud instantly, that is why some buffer -- time gap is configured to be analyzed by the system like shown in paper~\cite{DBLP:conf/complexnetworks/LebichotBCS16}.
+\end{itemize}
