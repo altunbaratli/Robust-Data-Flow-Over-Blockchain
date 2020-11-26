@@ -16,7 +16,7 @@ spec:
 
       containers:
       - name: generate-genesisblock
-        image: hyperledger/fabric-tools:1.4.0
+        image: hyperledger/fabric-tools:1.4.8
         imagePullPolicy: Always
         command: ["sh", "-c", "cd shared/artifacts && export FABRIC_CFG_PATH=$PWD && mkdir channel-artifacts && configtxgen -profile TwoOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block"]
         volumeMounts:

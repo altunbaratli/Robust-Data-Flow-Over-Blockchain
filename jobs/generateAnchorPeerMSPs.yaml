@@ -16,7 +16,7 @@ spec:
 
       containers:
       - name: create-anchorpeerorg1
-        image: hyperledger/fabric-tools:1.4.0
+        image: hyperledger/fabric-tools:1.4.8
         imagePullPolicy: Always
         command: ["sh", "-c", "cd shared/artifacts && export FABRIC_CFG_PATH=$PWD && configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID channel1 -asOrg Org1MSP"]
         volumeMounts:
@@ -24,7 +24,7 @@ spec:
           name: myvolume
 
       - name: create-anchorpeerorg2
-        image: hyperledger/fabric-tools:1.4.0
+        image: hyperledger/fabric-tools:1.4.8
         imagePullPolicy: Always
         command: ["sh", "-c", "cd shared/artifacts && export FABRIC_CFG_PATH=$PWD && configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID channel1 -asOrg Org2MSP"]
         volumeMounts:

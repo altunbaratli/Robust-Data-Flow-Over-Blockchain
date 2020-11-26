@@ -17,7 +17,7 @@ spec:
 
       containers:
       - name: joinchannel-org1peer1
-        image: hyperledger/fabric-tools:1.4.0
+        image: hyperledger/fabric-tools:1.4.8
         imagePullPolicy: Always
         command: ["sh", "-c", "cd /shared/artifacts/channel-artifacts/ && peer channel join -b ${CHANNEL_NAME}.block "]
         env:
@@ -46,7 +46,7 @@ spec:
           name: myvolume
 
       - name: joinchannel-org1peer2
-        image: hyperledger/fabric-tools:1.4.0
+        image: hyperledger/fabric-tools:1.4.8
         imagePullPolicy: Always
         command: ["sh", "-c", "cd /shared/artifacts/channel-artifacts/ && peer channel join -b ${CHANNEL_NAME}.block "]
         env:
@@ -75,7 +75,7 @@ spec:
           name: myvolume
 
       - name: joinchannel-org2peer1
-        image: hyperledger/fabric-tools:1.4.0
+        image: hyperledger/fabric-tools:1.4.8
         imagePullPolicy: Always
         command: ["sh", "-c", "cd /shared/artifacts/channel-artifacts/ && peer channel join -b ${CHANNEL_NAME}.block "]
         env:
@@ -104,7 +104,7 @@ spec:
           name: myvolume
 
       - name: joinchannel-org2peer2
-        image: hyperledger/fabric-tools:1.4.0
+        image: hyperledger/fabric-tools:1.4.8
         imagePullPolicy: Always
         command: ["sh", "-c", "cd /shared/artifacts/channel-artifacts/ && peer channel join -b ${CHANNEL_NAME}.block "]
         env:

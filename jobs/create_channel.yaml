@@ -17,7 +17,7 @@ spec:
           
       containers:
       - name: createchannel
-        image: hyperledger/fabric-tools:1.4.0
+        image: hyperledger/fabric-tools:1.4.8
         imagePullPolicy: Always
         command: ["sh", "-c", "cd /shared/artifacts/channel-artifacts/ && peer channel create -o ${ORDERER_URL} -c ${CHANNEL_NAME} -f ${CHANNEL_TX}"]
         env:
