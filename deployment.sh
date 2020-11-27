@@ -30,4 +30,6 @@ kubectl expose deployment rest-api --port=3000 --target-port=3000 &&
 cd node-red &&
 kubectl create deployment node-red --image=yigitpolat/hyperledger-iot-nodered &&
 kubectl apply -f node-red-svc-nodePort.yaml &&
+cd ../network-deployment &&
+kubectl apply -f expose-restapi.yaml &&
 kubectl get nodes -o wide
