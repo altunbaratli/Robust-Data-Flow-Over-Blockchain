@@ -1,27 +1,27 @@
 [
     {
-        "id": "d2b36bc.0c76518",
+        "id": "19a640c4.347c5f",
         "type": "tab",
         "label": "Dashboard",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "dee5a7d8.884cc8",
+        "id": "8e8b532c.5ad09",
         "type": "tab",
         "label": "State",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "46ea62de.86faa4",
+        "id": "362488ee.98e998",
         "type": "tab",
         "label": "History",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "64e747fe.a13458",
+        "id": "40cc1bcd.675514",
         "type": "tab",
         "label": "Registration",
         "disabled": false,
@@ -166,7 +166,7 @@
         "collapse": false
     },
     {
-        "id": "c398de40.1badf",
+        "id": "8a4f6539.575278",
         "type": "ui_tab",
         "z": "",
         "name": "Get State",
@@ -176,36 +176,36 @@
         "hidden": false
     },
     {
-        "id": "a357b9be.b71cd8",
+        "id": "ea6bc66d.c46478",
         "type": "ui_group",
         "z": "",
         "name": "Group 1",
-        "tab": "c398de40.1badf",
+        "tab": "8a4f6539.575278",
         "order": 1,
         "disp": true,
         "width": "12",
         "collapse": false
     },
     {
-        "id": "ffea0a94.c41a18",
+        "id": "60658c01.21d964",
         "type": "function",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "Body / Headers",
-        "func": "temp = msg.payload.d.ambientTemp;\n\nvar date = new Date();\nvar options = { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };\nvar time = date.toLocaleDateString('tr-TR', options);\n\n\nmsg.payload = {'username':'user3','channel':'channel1', 'smartcontract':'cc', 'args': {'sensorID':'0', 'temp':'100000','time':time} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
+        "func": "temp = msg.payload.d.ambientTemp;\n\nvar date = new Date();\nvar options = { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };\nvar time = date.toLocaleDateString('tr-TR', options);\n\n\nmsg.payload = {'username':'user2','channel':'channel1', 'smartcontract':'cc', 'args': {'sensorID':'1', 'temp':'100000','time':time} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 500,
         "y": 100,
         "wires": [
             [
-                "296b58f6.d2b8c"
+                "37141c9e.8cde64"
             ]
         ]
     },
     {
-        "id": "7d5b2889.b8b06",
+        "id": "19905528.23244b",
         "type": "debug",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -217,9 +217,9 @@
         "wires": []
     },
     {
-        "id": "296b58f6.d2b8c",
+        "id": "37141c9e.8cde64",
         "type": "http request",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "Add Temperature HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -229,15 +229,15 @@
         "y": 100,
         "wires": [
             [
-                "7d5b2889.b8b06",
-                "e7e0f100.e61c2"
+                "19905528.23244b",
+                "e8c5f140.da745"
             ]
         ]
     },
     {
-        "id": "f7a076d7.d80138",
+        "id": "b6870330.50348",
         "type": "http request",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Enroll Admin HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -247,14 +247,14 @@
         "y": 100,
         "wires": [
             [
-                "ae5682ee.639228"
+                "ef701a46.db2278"
             ]
         ]
     },
     {
-        "id": "44e1d684.18fec8",
+        "id": "6eef09df.89be18",
         "type": "function",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Body / Headers",
         "func": "msg.payload = {\"adminName\": \"admin\", \"password\":\"adminpw\"};\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
@@ -263,14 +263,14 @@
         "y": 100,
         "wires": [
             [
-                "f7a076d7.d80138"
+                "b6870330.50348"
             ]
         ]
     },
     {
-        "id": "b167a13d.f55908",
+        "id": "a2fa3cf5.81ba2",
         "type": "inject",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "POST",
         "topic": "",
         "payload": "",
@@ -283,14 +283,14 @@
         "y": 100,
         "wires": [
             [
-                "44e1d684.18fec8"
+                "6eef09df.89be18"
             ]
         ]
     },
     {
-        "id": "ae5682ee.639228",
+        "id": "ef701a46.db2278",
         "type": "debug",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -302,9 +302,9 @@
         "wires": []
     },
     {
-        "id": "d9e1b236.3d3b8",
+        "id": "70627e10.332d8",
         "type": "http request",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Register User HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -314,30 +314,30 @@
         "y": 200,
         "wires": [
             [
-                "7aeddda0.473dec"
+                "a3e8b459.73c7d8"
             ]
         ]
     },
     {
-        "id": "a4b3182c.452a18",
+        "id": "bf0c4a54.aa7b28",
         "type": "function",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Body / Headers",
-        "func": "msg.payload = {\"adminName\": \"admin\", \"username\":\"user3\"};\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
+        "func": "msg.payload = {\"adminName\": \"admin\", \"username\":\"user2\"};\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
         "y": 200,
         "wires": [
             [
-                "d9e1b236.3d3b8"
+                "70627e10.332d8"
             ]
         ]
     },
     {
-        "id": "f79a48ef.c9a3d8",
+        "id": "306f61fe.d1f50e",
         "type": "inject",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "POST",
         "topic": "",
         "payload": "",
@@ -350,14 +350,14 @@
         "y": 200,
         "wires": [
             [
-                "a4b3182c.452a18"
+                "bf0c4a54.aa7b28"
             ]
         ]
     },
     {
-        "id": "7aeddda0.473dec",
+        "id": "a3e8b459.73c7d8",
         "type": "debug",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -369,9 +369,9 @@
         "wires": []
     },
     {
-        "id": "fec06be5.6beef8",
+        "id": "4dc473bd.3a1b6c",
         "type": "http request",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Register Sensor HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -381,30 +381,30 @@
         "y": 300,
         "wires": [
             [
-                "fef68c19.a5e9e"
+                "5db3ae4a.b1574"
             ]
         ]
     },
     {
-        "id": "b46b6ff1.8a205",
+        "id": "6da3f107.b0dfd",
         "type": "function",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Body / Headers",
-        "func": "msg.payload = {\"username\": \"user1\", \"channel\":\"channel1\", \"smartcontract\":\"cc\", \"args\":{\"sensorID\": \"1\"} }\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
+        "func": "msg.payload = {\"username\": \"user2\", \"channel\":\"channel1\", \"smartcontract\":\"cc\", \"args\":{\"sensorID\": \"1\"} }\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
         "y": 300,
         "wires": [
             [
-                "fec06be5.6beef8"
+                "4dc473bd.3a1b6c"
             ]
         ]
     },
     {
-        "id": "ca671899.5a4628",
+        "id": "1517e66b.cbd20a",
         "type": "inject",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "POST",
         "topic": "",
         "payload": "",
@@ -417,14 +417,14 @@
         "y": 300,
         "wires": [
             [
-                "b46b6ff1.8a205"
+                "6da3f107.b0dfd"
             ]
         ]
     },
     {
-        "id": "fef68c19.a5e9e",
+        "id": "5db3ae4a.b1574",
         "type": "debug",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -436,9 +436,9 @@
         "wires": []
     },
     {
-        "id": "e7e0f100.e61c2",
+        "id": "e8c5f140.da745",
         "type": "ui_toast",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "position": "top right",
         "displayTime": "1",
         "highlight": "",
@@ -452,9 +452,9 @@
         "wires": []
     },
     {
-        "id": "eca10d75.b2d6b",
+        "id": "359f4102.9ce9ce",
         "type": "comment",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "Sensor A",
         "info": "",
         "x": 100,
@@ -462,9 +462,9 @@
         "wires": []
     },
     {
-        "id": "8514ec0e.0c6598",
+        "id": "49449728.f34ef8",
         "type": "data-generator",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "",
         "field": "payload",
         "fieldType": "msg",
@@ -474,14 +474,14 @@
         "y": 200,
         "wires": [
             [
-                "59d55330.f0ff2c"
+                "8308d510.2b3b98"
             ]
         ]
     },
     {
-        "id": "d5210179.74bae8",
+        "id": "4d9b6263.3378fc",
         "type": "inject",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "",
         "topic": "",
         "payload": "",
@@ -494,14 +494,14 @@
         "y": 200,
         "wires": [
             [
-                "8514ec0e.0c6598"
+                "49449728.f34ef8"
             ]
         ]
     },
     {
-        "id": "59d55330.f0ff2c",
+        "id": "8308d510.2b3b98",
         "type": "json",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "",
         "property": "payload",
         "action": "",
@@ -510,15 +510,15 @@
         "y": 200,
         "wires": [
             [
-                "f83774d2.9716",
-                "ffea0a94.c41a18"
+                "1a6523aa.d3822c",
+                "60658c01.21d964"
             ]
         ]
     },
     {
-        "id": "f83774d2.9716",
+        "id": "1a6523aa.d3822c",
         "type": "ui_gauge",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "",
         "group": "fdad0cfd.dd9c2",
         "order": 1,
@@ -542,25 +542,25 @@
         "wires": []
     },
     {
-        "id": "37eb4c37.afbbac",
+        "id": "a23f8a77.022138",
         "type": "function",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "Body / Headers",
-        "func": "temp = msg.payload.d.ambientTemp;\n\nvar date = new Date();\nvar options = { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };\nvar time = date.toLocaleDateString('tr-TR', options);\n\n\nmsg.payload = {'username':'user3','channel':'channel1', 'smartcontract':'cc', 'args': {'sensorID':'1', 'temp':temp,'time':time} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
+        "func": "temp = msg.payload.d.ambientTemp;\n\nvar date = new Date();\nvar options = { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };\nvar time = date.toLocaleDateString('tr-TR', options);\n\n\nmsg.payload = {'username':'user2','channel':'channel1', 'smartcontract':'cc', 'args': {'sensorID':'2', 'temp':temp,'time':time} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 500,
         "y": 420,
         "wires": [
             [
-                "97aa0fb9.e13958"
+                "1f9d39fe.d1c876"
             ]
         ]
     },
     {
-        "id": "b39763a4.51a6d8",
+        "id": "435a71f6.bdade",
         "type": "debug",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -572,9 +572,9 @@
         "wires": []
     },
     {
-        "id": "97aa0fb9.e13958",
+        "id": "1f9d39fe.d1c876",
         "type": "http request",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "Add Temperature HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -584,15 +584,15 @@
         "y": 420,
         "wires": [
             [
-                "b39763a4.51a6d8",
-                "d37b42e7.cc581"
+                "435a71f6.bdade",
+                "79b5ac4b.6bde94"
             ]
         ]
     },
     {
-        "id": "d37b42e7.cc581",
+        "id": "79b5ac4b.6bde94",
         "type": "ui_toast",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "position": "top right",
         "displayTime": "1",
         "highlight": "",
@@ -606,9 +606,9 @@
         "wires": []
     },
     {
-        "id": "16565371.e0e36d",
+        "id": "24484485.9d7c2c",
         "type": "data-generator",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "",
         "field": "payload",
         "fieldType": "msg",
@@ -618,14 +618,14 @@
         "y": 520,
         "wires": [
             [
-                "1f6aaf4f.028fb1"
+                "16503620.655d0a"
             ]
         ]
     },
     {
-        "id": "8ead793a.08c22",
+        "id": "3da5a8c1.733848",
         "type": "inject",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "",
         "topic": "",
         "payload": "",
@@ -638,14 +638,14 @@
         "y": 520,
         "wires": [
             [
-                "16565371.e0e36d"
+                "24484485.9d7c2c"
             ]
         ]
     },
     {
-        "id": "1f6aaf4f.028fb1",
+        "id": "16503620.655d0a",
         "type": "json",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "",
         "property": "payload",
         "action": "",
@@ -654,15 +654,15 @@
         "y": 520,
         "wires": [
             [
-                "36d5b4ec.f786e4",
-                "37eb4c37.afbbac"
+                "e4e9fd9e.54037",
+                "a23f8a77.022138"
             ]
         ]
     },
     {
-        "id": "36d5b4ec.f786e4",
+        "id": "e4e9fd9e.54037",
         "type": "ui_gauge",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "",
         "group": "fdad0cfd.dd9c2",
         "order": 1,
@@ -686,9 +686,9 @@
         "wires": []
     },
     {
-        "id": "ced7c6d7.4b76a",
+        "id": "c31b5463.82b1a8",
         "type": "comment",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "Sensor B",
         "info": "",
         "x": 100,
@@ -696,9 +696,9 @@
         "wires": []
     },
     {
-        "id": "103adede.648421",
+        "id": "fbcb8db8.76a38",
         "type": "comment",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Sensor A",
         "info": "",
         "x": 120,
@@ -706,9 +706,9 @@
         "wires": []
     },
     {
-        "id": "b7685058.d90938",
+        "id": "14cc4659.243b5a",
         "type": "comment",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Sensor B",
         "info": "",
         "x": 120,
@@ -716,9 +716,9 @@
         "wires": []
     },
     {
-        "id": "39ea68de.844b5",
+        "id": "419b595d.f82f18",
         "type": "http request",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Register Sensor HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -728,30 +728,30 @@
         "y": 420,
         "wires": [
             [
-                "4bd27433.e80e34"
+                "ba69ab9a.4cd1b8"
             ]
         ]
     },
     {
-        "id": "c5d445b6.1e8668",
+        "id": "b762d7c4.b46218",
         "type": "function",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Body / Headers",
-        "func": "msg.payload = {\"username\": \"user1\", \"channel\":\"channel1\", \"smartcontract\":\"cc\", \"args\":{\"sensorID\": \"2\"} }\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
+        "func": "msg.payload = {\"username\": \"user2\", \"channel\":\"channel1\", \"smartcontract\":\"cc\", \"args\":{\"sensorID\": \"2\"} }\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
         "y": 420,
         "wires": [
             [
-                "39ea68de.844b5"
+                "419b595d.f82f18"
             ]
         ]
     },
     {
-        "id": "f676a590.42d69",
+        "id": "c008da6e.225668",
         "type": "inject",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "POST",
         "topic": "",
         "payload": "",
@@ -764,14 +764,14 @@
         "y": 420,
         "wires": [
             [
-                "c5d445b6.1e8668"
+                "b762d7c4.b46218"
             ]
         ]
     },
     {
-        "id": "4bd27433.e80e34",
+        "id": "ba69ab9a.4cd1b8",
         "type": "debug",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -783,9 +783,9 @@
         "wires": []
     },
     {
-        "id": "5dba94b7.c00d2c",
+        "id": "85803200.3d79f",
         "type": "comment",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Sensor C",
         "info": "",
         "x": 120,
@@ -793,9 +793,9 @@
         "wires": []
     },
     {
-        "id": "2b56f1e3.df5e5e",
+        "id": "a4828f37.31927",
         "type": "http request",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Register Sensor HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -805,30 +805,30 @@
         "y": 540,
         "wires": [
             [
-                "d7013e9a.c7553"
+                "57db43.d2eb84bc"
             ]
         ]
     },
     {
-        "id": "6a3144a4.c061e4",
+        "id": "6e49050.c597bfc",
         "type": "function",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Body / Headers",
-        "func": "msg.payload = {\"username\": \"user1\", \"channel\":\"channel1\", \"smartcontract\":\"cc\", \"args\":{\"sensorID\": \"3\"} }\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
+        "func": "msg.payload = {\"username\": \"user2\", \"channel\":\"channel1\", \"smartcontract\":\"cc\", \"args\":{\"sensorID\": \"3\"} }\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
         "y": 540,
         "wires": [
             [
-                "2b56f1e3.df5e5e"
+                "a4828f37.31927"
             ]
         ]
     },
     {
-        "id": "30469f5b.755ee8",
+        "id": "a7daba0b.d20dc8",
         "type": "inject",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "POST",
         "topic": "",
         "payload": "",
@@ -841,14 +841,14 @@
         "y": 540,
         "wires": [
             [
-                "6a3144a4.c061e4"
+                "6e49050.c597bfc"
             ]
         ]
     },
     {
-        "id": "d7013e9a.c7553",
+        "id": "57db43.d2eb84bc",
         "type": "debug",
-        "z": "64e747fe.a13458",
+        "z": "40cc1bcd.675514",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -860,9 +860,9 @@
         "wires": []
     },
     {
-        "id": "d2d87c02.79c0f8",
+        "id": "48d83fdf.61426",
         "type": "http request",
-        "z": "dee5a7d8.884cc8",
+        "z": "8e8b532c.5ad09",
         "name": "Get History HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -872,14 +872,14 @@
         "y": 120,
         "wires": [
             [
-                "52fb0e13.83fca8"
+                "94c419b9.02eec8"
             ]
         ]
     },
     {
-        "id": "52fb0e13.83fca8",
+        "id": "94c419b9.02eec8",
         "type": "json",
-        "z": "dee5a7d8.884cc8",
+        "z": "8e8b532c.5ad09",
         "name": "JSON to Object",
         "property": "payload",
         "action": "",
@@ -888,15 +888,15 @@
         "y": 120,
         "wires": [
             [
-                "83b7f1f2.618828",
-                "2afc4807.b25f7"
+                "d44a0c10.d83ea",
+                "bca99ff8.92aaa"
             ]
         ]
     },
     {
-        "id": "83b7f1f2.618828",
+        "id": "d44a0c10.d83ea",
         "type": "debug",
-        "z": "dee5a7d8.884cc8",
+        "z": "8e8b532c.5ad09",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -908,9 +908,9 @@
         "wires": []
     },
     {
-        "id": "2afc4807.b25f7",
+        "id": "bca99ff8.92aaa",
         "type": "template",
-        "z": "dee5a7d8.884cc8",
+        "z": "8e8b532c.5ad09",
         "name": "Template",
         "field": "style",
         "fieldType": "msg",
@@ -921,36 +921,36 @@
         "y": 180,
         "wires": [
             [
-                "732bdf55.40ad"
+                "f62949f4.bee608"
             ]
         ]
     },
     {
-        "id": "a0e874f5.51454",
+        "id": "b0da57b0.c305a8",
         "type": "function",
-        "z": "dee5a7d8.884cc8",
+        "z": "8e8b532c.5ad09",
         "name": "Body / Headers",
-        "func": "msg.payload = {'username':'user3','channel':'channel1', 'smartcontract':'cc', \"args\": {\"startID\":\"0\", \"endID\":\"999\"} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
+        "func": "msg.payload = {'username':'user2','channel':'channel1', 'smartcontract':'cc', \"args\": {\"startID\":\"0\", \"endID\":\"999\"} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 300,
         "y": 120,
         "wires": [
             [
-                "d2d87c02.79c0f8"
+                "48d83fdf.61426"
             ]
         ]
     },
     {
-        "id": "732bdf55.40ad",
+        "id": "f62949f4.bee608",
         "type": "ui_template",
-        "z": "dee5a7d8.884cc8",
-        "group": "a357b9be.b71cd8",
+        "z": "8e8b532c.5ad09",
+        "group": "ea6bc66d.c46478",
         "name": "Table",
         "order": 1,
         "width": "12",
         "height": "4",
-        "format": "<style>\n    {{msg.style}}\n</style>\n\n<table>\n  <thead>\n    <tr>\n      <th scope=\"col\">SensorID</th>\n      <th scope=\"col\">Time</th>\n      <th scope=\"col\">Temperature</th>\n      <th scope=\"col\">Outlier</th>\n      <th scope=\"col\">Stuck-at Fault</th>\n      <th scope=\"col\">SC Fault</th>\n    </tr>\n  </thead>\n  \n  <tr ng-repeat=\"obj in msg.payload\">\n    <td>{{ obj.Value.sensorID }}</td>\n    <td>{{ obj.Value.time }}</td>\n    <td>{{ obj.Value.temp }}</td>\n    <td>{{ obj.Value.outlier }}</td>\n    <td>{{ obj.Value.stuckatfault }}</td>\n    <td>{{ obj.Value.scfault }}</td>\n  </tr>\n</table>",
+        "format": "<style>\n    {{msg.style}}\n</style>\n\n<table>\n  <thead>\n    <tr>\n      <th scope=\"col\">SensorID</th>\n      <th scope=\"col\">Time</th>\n      <th scope=\"col\">Temperature</th>\n      <th scope=\"col\">Outlier</th>\n      <th scope=\"col\">Stuck-at Fault</th>\n      <th scope=\"col\">SC Fault</th>\n      <th scope=\"col\">Final Temperature</th>\n    </tr>\n  </thead>\n  \n  <tr ng-repeat=\"obj in msg.payload\">\n    <td>{{ obj.Value.sensorID }}</td>\n    <td>{{ obj.Value.time }}</td>\n    <td>{{ obj.Value.temp }}</td>\n    <td>{{ obj.Value.outlier }}</td>\n    <td>{{ obj.Value.stuckatfault }}</td>\n    <td>{{ obj.Value.scfault }}</td>\n    <td>{{ obj.Value.finaltemp }}</td>\n  </tr>\n</table>",
         "storeOutMessages": false,
         "fwdInMessages": true,
         "templateScope": "local",
@@ -961,11 +961,11 @@
         ]
     },
     {
-        "id": "50ae7fa0.770908",
+        "id": "940e23a6.662f2",
         "type": "ui_button",
-        "z": "dee5a7d8.884cc8",
+        "z": "8e8b532c.5ad09",
         "name": "",
-        "group": "a357b9be.b71cd8",
+        "group": "ea6bc66d.c46478",
         "order": 1,
         "width": "0",
         "height": "0",
@@ -982,14 +982,14 @@
         "y": 120,
         "wires": [
             [
-                "a0e874f5.51454"
+                "b0da57b0.c305a8"
             ]
         ]
     },
     {
-        "id": "11db119f.657116",
+        "id": "91915fe7.da77a",
         "type": "http request",
-        "z": "46ea62de.86faa4",
+        "z": "362488ee.98e998",
         "name": "Get History HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -999,14 +999,14 @@
         "y": 100,
         "wires": [
             [
-                "919c7251.66b8a8"
+                "943b6523.b3fba8"
             ]
         ]
     },
     {
-        "id": "919c7251.66b8a8",
+        "id": "943b6523.b3fba8",
         "type": "json",
-        "z": "46ea62de.86faa4",
+        "z": "362488ee.98e998",
         "name": "JSON to Object",
         "property": "payload",
         "action": "",
@@ -1015,15 +1015,15 @@
         "y": 100,
         "wires": [
             [
-                "51bf5ed7.aa4998",
-                "5929389a.37c3d"
+                "4e1e4698.1adef8",
+                "dd7e4e0e.d8832"
             ]
         ]
     },
     {
-        "id": "51bf5ed7.aa4998",
+        "id": "4e1e4698.1adef8",
         "type": "debug",
-        "z": "46ea62de.86faa4",
+        "z": "362488ee.98e998",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -1035,9 +1035,9 @@
         "wires": []
     },
     {
-        "id": "5929389a.37c3d",
+        "id": "dd7e4e0e.d8832",
         "type": "template",
-        "z": "46ea62de.86faa4",
+        "z": "362488ee.98e998",
         "name": "Template",
         "field": "style",
         "fieldType": "msg",
@@ -1048,30 +1048,30 @@
         "y": 160,
         "wires": [
             [
-                "b49442b8.f4c5f"
+                "d2146cc2.86c92"
             ]
         ]
     },
     {
-        "id": "711c6277.206244",
+        "id": "2493f170.c2ccee",
         "type": "function",
-        "z": "46ea62de.86faa4",
+        "z": "362488ee.98e998",
         "name": "Body / Headers",
-        "func": "msg.payload = {'username':'user3','channel':'channel1', 'smartcontract':'cc', \"args\": {\"sensorID\":\"0\"} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
+        "func": "msg.payload = {'username':'user2','channel':'channel1', 'smartcontract':'cc', \"args\": {\"sensorID\":\"2\"} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 280,
         "y": 100,
         "wires": [
             [
-                "11db119f.657116"
+                "91915fe7.da77a"
             ]
         ]
     },
     {
-        "id": "6b20cc65.2a33ec",
+        "id": "97abaadc.f526d8",
         "type": "ui_button",
-        "z": "46ea62de.86faa4",
+        "z": "362488ee.98e998",
         "name": "",
         "group": "5721af64.a940a",
         "order": 1,
@@ -1090,20 +1090,20 @@
         "y": 100,
         "wires": [
             [
-                "711c6277.206244"
+                "2493f170.c2ccee"
             ]
         ]
     },
     {
-        "id": "b49442b8.f4c5f",
+        "id": "d2146cc2.86c92",
         "type": "ui_template",
-        "z": "46ea62de.86faa4",
+        "z": "362488ee.98e998",
         "group": "5721af64.a940a",
         "name": "Table",
         "order": 1,
         "width": "20",
-        "height": "13",
-        "format": "<style>\n    {{msg.style}}\n</style>\n\n<table>\n  <thead>\n    <tr>\n      <th scope=\"col\">TxId</th>\n      <th scope=\"col\">SensorID</th>\n      <th scope=\"col\">Time</th>\n      <th scope=\"col\">Temp</th>\n      <th scope=\"col\">Outlier</th>\n      <th scope=\"col\">Stuck-at Fault</th>\n      <th scope=\"col\">Spatial Correlation Fault</th>\n    </tr>\n  </thead>\n  \n  <tr ng-repeat=\"obj in msg.payload\">\n    <td>{{ obj.TxId }}</td>\n    <td>{{ obj.Value.sensorID }}</td>\n    <td>{{ obj.Value.time }}</td>\n    <td>{{ obj.Value.temp }}</td>\n    <td>{{ obj.Value.outlier }}</td>\n    <td>{{ obj.Value.stuckatfault }}</td>\n    <td>{{ obj.Value.scfault }}</td>\n  </tr>\n</table>",
+        "height": "20",
+        "format": "<style>\n    {{msg.style}}\n</style>\n\n<table>\n  <thead>\n    <tr>\n      <th scope=\"col\">TxId</th>\n      <th scope=\"col\">SensorID</th>\n      <th scope=\"col\">Time</th>\n      <th scope=\"col\">Temp</th>\n      <th scope=\"col\">Outlier</th>\n      <th scope=\"col\">Stuck-at Fault</th>\n      <th scope=\"col\">Spatial Correlation Fault</th>\n      <th scope=\"col\">Final Temperature</th>\n    </tr>\n  </thead>\n  \n  <tr ng-repeat=\"obj in msg.payload\">\n    <td>{{ obj.TxId }}</td>\n    <td>{{ obj.Value.sensorID }}</td>\n    <td>{{ obj.Value.time }}</td>\n    <td>{{ obj.Value.temp }}</td>\n    <td>{{ obj.Value.outlier }}</td>\n    <td>{{ obj.Value.stuckatfault }}</td>\n    <td>{{ obj.Value.scfault }}</td>\n    <td>{{ obj.Value.finaltemp }}</td>\n  </tr>\n</table>",
         "storeOutMessages": false,
         "fwdInMessages": true,
         "templateScope": "local",
@@ -1114,25 +1114,25 @@
         ]
     },
     {
-        "id": "469d3bd4.ac1f4c",
+        "id": "82461390.71a8e",
         "type": "function",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "Body / Headers",
-        "func": "temp = msg.payload.d.ambientTemp;\n\nvar date = new Date();\nvar options = { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };\nvar time = date.toLocaleDateString('tr-TR', options);\n\n\nmsg.payload = {'username':'user3','channel':'channel1', 'smartcontract':'cc', 'args': {'sensorID':'2', 'temp':temp,'time':time} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
+        "func": "temp = msg.payload.d.ambientTemp;\n\nvar date = new Date();\nvar options = { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };\nvar time = date.toLocaleDateString('tr-TR', options);\n\n\nmsg.payload = {'username':'user2','channel':'channel1', 'smartcontract':'cc', 'args': {'sensorID':'3', 'temp':temp,'time':time} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 500,
         "y": 720,
         "wires": [
             [
-                "5a4db5f6.8d4444"
+                "a05ceb68.12fc28"
             ]
         ]
     },
     {
-        "id": "af066b70.781d2",
+        "id": "91c35d83.90522",
         "type": "debug",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -1144,9 +1144,9 @@
         "wires": []
     },
     {
-        "id": "5a4db5f6.8d4444",
+        "id": "a05ceb68.12fc28",
         "type": "http request",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "Add Temperature HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -1156,15 +1156,15 @@
         "y": 720,
         "wires": [
             [
-                "af066b70.781d2",
-                "f4da993d.bc2398"
+                "91c35d83.90522",
+                "c92395f1.af5448"
             ]
         ]
     },
     {
-        "id": "f4da993d.bc2398",
+        "id": "c92395f1.af5448",
         "type": "ui_toast",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "position": "top right",
         "displayTime": "1",
         "highlight": "",
@@ -1178,9 +1178,9 @@
         "wires": []
     },
     {
-        "id": "95e6f16e.294f68",
+        "id": "e0ef2913.3fd6e8",
         "type": "data-generator",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "",
         "field": "payload",
         "fieldType": "msg",
@@ -1190,14 +1190,14 @@
         "y": 820,
         "wires": [
             [
-                "f226dac2.046da"
+                "d98ebac9.2620f8"
             ]
         ]
     },
     {
-        "id": "c0580cf1.4499b",
+        "id": "5d1e1aea.484784",
         "type": "inject",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "",
         "topic": "",
         "payload": "",
@@ -1210,14 +1210,14 @@
         "y": 820,
         "wires": [
             [
-                "95e6f16e.294f68"
+                "e0ef2913.3fd6e8"
             ]
         ]
     },
     {
-        "id": "f226dac2.046da",
+        "id": "d98ebac9.2620f8",
         "type": "json",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "",
         "property": "payload",
         "action": "",
@@ -1226,15 +1226,15 @@
         "y": 820,
         "wires": [
             [
-                "bb06d316.935fb8",
-                "469d3bd4.ac1f4c"
+                "6abec7dc.f18c38",
+                "82461390.71a8e"
             ]
         ]
     },
     {
-        "id": "bb06d316.935fb8",
+        "id": "6abec7dc.f18c38",
         "type": "ui_gauge",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "",
         "group": "fdad0cfd.dd9c2",
         "order": 1,
@@ -1258,167 +1258,13 @@
         "wires": []
     },
     {
-        "id": "279203c5.54d52c",
+        "id": "6976abb5.23a794",
         "type": "comment",
-        "z": "d2b36bc.0c76518",
+        "z": "19a640c4.347c5f",
         "name": "Sensor C",
         "info": "",
         "x": 100,
         "y": 660,
-        "wires": []
-    },
-    {
-        "id": "ad74f46b.6992b",
-        "type": "function",
-        "z": "d2b36bc.0c76518",
-        "name": "Body / Headers",
-        "func": "temp = msg.payload.d.ambientTemp;\n\nvar date = new Date();\nvar options = { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };\nvar time = date.toLocaleDateString('tr-TR', options);\n\n\nmsg.payload = {'username':'user3','channel':'channel1', 'smartcontract':'cc', 'args': {'sensorID':'3', 'temp':temp,'time':time} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 500,
-        "y": 1020,
-        "wires": [
-            [
-                "c1e95a7c.17ece8"
-            ]
-        ]
-    },
-    {
-        "id": "36971edc.1dddc2",
-        "type": "debug",
-        "z": "d2b36bc.0c76518",
-        "name": "Result",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 970,
-        "y": 1020,
-        "wires": []
-    },
-    {
-        "id": "c1e95a7c.17ece8",
-        "type": "http request",
-        "z": "d2b36bc.0c76518",
-        "name": "Add Temperature HTTP Request",
-        "method": "POST",
-        "ret": "txt",
-        "url": "http://rest-api:3000/api/addTemp",
-        "tls": "",
-        "x": 730,
-        "y": 1020,
-        "wires": [
-            [
-                "36971edc.1dddc2",
-                "979ae4d1.451a5"
-            ]
-        ]
-    },
-    {
-        "id": "979ae4d1.451a5",
-        "type": "ui_toast",
-        "z": "d2b36bc.0c76518",
-        "position": "top right",
-        "displayTime": "1",
-        "highlight": "",
-        "outputs": 0,
-        "ok": "OK",
-        "cancel": "",
-        "topic": "Success",
-        "name": "Notification",
-        "x": 990,
-        "y": 1080,
-        "wires": []
-    },
-    {
-        "id": "1acc7084.f62247",
-        "type": "data-generator",
-        "z": "d2b36bc.0c76518",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "syntax": "text",
-        "template": "{\"d\":{\"ambientTemp\": \"{{float 20 22 '0.00'}}\" }}",
-        "x": 300,
-        "y": 1120,
-        "wires": [
-            [
-                "ade0827a.99fb48"
-            ]
-        ]
-    },
-    {
-        "id": "9c63daf.5ddde28",
-        "type": "inject",
-        "z": "d2b36bc.0c76518",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 120,
-        "y": 1120,
-        "wires": [
-            [
-                "1acc7084.f62247"
-            ]
-        ]
-    },
-    {
-        "id": "ade0827a.99fb48",
-        "type": "json",
-        "z": "d2b36bc.0c76518",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 460,
-        "y": 1120,
-        "wires": [
-            [
-                "eca35549.b6c4d",
-                "ad74f46b.6992b"
-            ]
-        ]
-    },
-    {
-        "id": "eca35549.b6c4d",
-        "type": "ui_gauge",
-        "z": "d2b36bc.0c76518",
-        "name": "",
-        "group": "fdad0cfd.dd9c2",
-        "order": 1,
-        "width": "6",
-        "height": "6",
-        "gtype": "gage",
-        "title": "Temperature C",
-        "label": "°C",
-        "format": "{{msg.payload.d.ambientTemp}}",
-        "min": 0,
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "x": 640,
-        "y": 1120,
-        "wires": []
-    },
-    {
-        "id": "79e73479.008734",
-        "type": "comment",
-        "z": "d2b36bc.0c76518",
-        "name": "Sensor D",
-        "info": "",
-        "x": 100,
-        "y": 960,
         "wires": []
     }
 ]
