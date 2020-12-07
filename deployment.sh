@@ -2,6 +2,7 @@
 
 cd volume &&
 kubectl create -f createPVandPVC.yaml &&
+sleep 10 &&
 cd ../jobs &&
 kubectl apply -f copyArtifactsJob.yaml &&
 sleep 10 &&

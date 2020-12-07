@@ -58,11 +58,7 @@ func Abs(x float64) float64 {
 }
 
 func (s *SmartContract) Init(stub shim.ChaincodeStubInterface) peer.Response {
-	values := []Value{
-		Value{SensorID: "0", Temp: " ", Time: " ", Outlier: " "},
-		Value{SensorID: "1", Temp: " ", Time: " ", Outlier: " "},
-		Value{SensorID: "2", Temp: " ", Time: " ", Outlier: " "},
-	}
+	values := []Value{}
 
 	i := 0
 	for i < len(values) {
@@ -275,7 +271,7 @@ func (s *SmartContract) calculateFinalTemp(stub shim.ChaincodeStubInterface, sen
 		return measurement
 	}
 
-	if (StuckatFault != "0%") || (SCFault != "0%") {
+	if (StuckatFault == "100%") || (SCFault == "100%") {
 		for _, element := range response {
 			size++
 			if element.Value.SensorID == sensorID {
