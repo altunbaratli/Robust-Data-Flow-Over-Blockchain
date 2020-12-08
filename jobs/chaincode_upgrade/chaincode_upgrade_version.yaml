@@ -17,7 +17,7 @@ spec:
           
       containers:
       - name: chaincodeupgradeversion1
-        image: hyperledger/fabric-tools:1.4.0
+        image: hyperledger/fabric-tools:1.4.8
         imagePullPolicy: Always
         command: ["sh", "-c", "cp -R /shared/artifacts/chaincode/ /opt/gopath/src/ && peer chaincode upgrade -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -C ${CHANNEL_NAME} -p iot_chaincode -c '{\"Args\":[\"\"]}' -P \"AND ('Org1MSP.member','Org2MSP.member')\""]
         env:
@@ -27,7 +27,7 @@ spec:
           value: "cc"
         - name: CHAINCODE_VERSION
         #change with new chaincode version
-          value: "4.1" 
+          value: "4.2" 
         - name: FABRIC_CFG_PATH
           value: /etc/hyperledger/fabric
         - name: CORE_PEER_MSPCONFIGPATH
@@ -43,7 +43,7 @@ spec:
           name: myvolume
 
       - name: chaincodeupgradeversion2
-        image: hyperledger/fabric-tools:1.4.0
+        image: hyperledger/fabric-tools:1.4.8
         imagePullPolicy: Always
         command: ["sh", "-c", "cp -R /shared/artifacts/chaincode/ /opt/gopath/src/ && peer chaincode upgrade -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -C ${CHANNEL_NAME} -p iot_chaincode -c '{\"Args\":[\"\"]}' -P \"AND ('Org1MSP.member','Org2MSP.member')\""]
         env:
@@ -53,7 +53,7 @@ spec:
           value: "cc"
         - name: CHAINCODE_VERSION
         #change with new chaincode version
-          value: "4.1"
+          value: "4.2"
         - name: FABRIC_CFG_PATH
           value: /etc/hyperledger/fabric
         - name: CORE_PEER_MSPCONFIGPATH

@@ -17,7 +17,7 @@ spec:
           
       containers:
       - name: chaincodeinstall1
-        image: hyperledger/fabric-tools:1.4.0
+        image: hyperledger/fabric-tools:1.4.8
         imagePullPolicy: Always
         command: ["sh", "-c", "cp -R /shared/artifacts/chaincode/ /opt/gopath/src/ && peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p iot_chaincode"]
         env:
@@ -40,7 +40,7 @@ spec:
           name: myvolume
 
       - name: chaincodeinstall2
-        image: hyperledger/fabric-tools:1.4.0
+        image: hyperledger/fabric-tools:1.4.8
         imagePullPolicy: Always
         command: ["sh", "-c", "cp -R /shared/artifacts/chaincode/ /opt/gopath/src/ && peer chaincode install -n ${CHAINCODE_NAME} -v ${CHAINCODE_VERSION} -p iot_chaincode"]
         env:
