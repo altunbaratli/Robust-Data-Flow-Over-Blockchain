@@ -1,27 +1,27 @@
 [
     {
-        "id": "e1f1ce9e.cd563",
+        "id": "5ac076f7.807208",
         "type": "tab",
         "label": "Dashboard",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "a6a40467.0c7cf8",
+        "id": "43b7df1b.991e9",
         "type": "tab",
         "label": "State",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "bd1a651f.1d5b68",
+        "id": "8e2121ed.3798e",
         "type": "tab",
         "label": "History",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "3e6a1931.551c96",
+        "id": "46d4aaf3.b99c74",
         "type": "tab",
         "label": "Registration",
         "disabled": false,
@@ -148,7 +148,7 @@
         "id": "43ae93e4.3fd91c",
         "type": "ui_tab",
         "z": "",
-        "name": "Sensor History",
+        "name": "Sensor 1 History",
         "icon": "fa-history",
         "order": 2,
         "disabled": false,
@@ -166,30 +166,82 @@
         "collapse": false
     },
     {
-        "id": "6e34649.ed3139c",
+        "id": "b3856cd7.10f3d",
         "type": "ui_tab",
         "z": "",
-        "name": "Get State",
+        "name": "Current State",
         "icon": "dashboard",
+        "order": 5,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "72652ac0.352764",
+        "type": "ui_group",
+        "z": "",
+        "name": "Group 1",
+        "tab": "b3856cd7.10f3d",
+        "order": 1,
+        "disp": false,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "7b78e94a.1a2538",
+        "type": "ui_group",
+        "z": "",
+        "name": "Default",
+        "tab": "",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "227efcda.684ce4",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Sensor 2 History",
+        "icon": "fa-history",
         "order": 3,
         "disabled": false,
         "hidden": false
     },
     {
-        "id": "46aa02ba.2d710c",
+        "id": "b369f7e.7266608",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Sensor 3 History",
+        "icon": "fa-history",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "3012c9a.0738036",
         "type": "ui_group",
         "z": "",
         "name": "Group 1",
-        "tab": "6e34649.ed3139c",
+        "tab": "227efcda.684ce4",
         "order": 1,
-        "disp": true,
-        "width": "12",
+        "disp": false,
+        "width": "20",
         "collapse": false
     },
     {
-        "id": "7f6ed27e.cffe9c",
+        "id": "9784e13b.d623a",
+        "type": "ui_group",
+        "z": "",
+        "name": "Group 1",
+        "tab": "b369f7e.7266608",
+        "order": 1,
+        "disp": false,
+        "width": "20",
+        "collapse": false
+    },
+    {
+        "id": "e25b1847.942268",
         "type": "function",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "Body / Headers",
         "func": "temp = msg.payload.d.ambientTemp;\n\nvar date = new Date();\nvar options = { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };\nvar time = date.toLocaleDateString('tr-TR', options);\n\n\nmsg.payload = {'username':'user2','channel':'channel1', 'smartcontract':'cc', 'args': {'sensorID':'1', 'temp':temp,'time':time} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
@@ -198,14 +250,14 @@
         "y": 100,
         "wires": [
             [
-                "fa90549d.2aee08"
+                "b43b9b0b.3d5f18"
             ]
         ]
     },
     {
-        "id": "cb6c63e5.85f35",
+        "id": "d3185686.794058",
         "type": "debug",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -217,9 +269,9 @@
         "wires": []
     },
     {
-        "id": "fa90549d.2aee08",
+        "id": "b43b9b0b.3d5f18",
         "type": "http request",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "Add Temperature HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -229,48 +281,48 @@
         "y": 100,
         "wires": [
             [
-                "cb6c63e5.85f35",
-                "464f0826.5695e8"
+                "d3185686.794058",
+                "df0f172d.f12478"
             ]
         ]
     },
     {
-        "id": "c9919bf1.11d6f8",
+        "id": "45e52046.47d7c",
         "type": "http request",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "Enroll Admin HTTP Request",
         "method": "POST",
         "ret": "txt",
         "url": "http://rest-api:3000/api/enrollAdmin",
         "tls": "",
         "x": 560,
-        "y": 100,
+        "y": 140,
         "wires": [
             [
-                "345f659d.93547a"
+                "7f3569f0.b583c8"
             ]
         ]
     },
     {
-        "id": "b3539900.f14c18",
+        "id": "941118cc.0ba5d8",
         "type": "function",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "Body / Headers",
         "func": "msg.payload = {\"adminName\": \"admin\", \"password\":\"adminpw\"};\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
-        "y": 100,
+        "y": 140,
         "wires": [
             [
-                "c9919bf1.11d6f8"
+                "45e52046.47d7c"
             ]
         ]
     },
     {
-        "id": "496f5868.116058",
+        "id": "d5836209.18e15",
         "type": "inject",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "POST",
         "topic": "",
         "payload": "",
@@ -280,17 +332,17 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 130,
-        "y": 100,
+        "y": 140,
         "wires": [
             [
-                "b3539900.f14c18"
+                "941118cc.0ba5d8"
             ]
         ]
     },
     {
-        "id": "345f659d.93547a",
+        "id": "7f3569f0.b583c8",
         "type": "debug",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -298,46 +350,46 @@
         "tostatus": false,
         "complete": "payload",
         "x": 790,
-        "y": 100,
+        "y": 140,
         "wires": []
     },
     {
-        "id": "54328a52.b0dfe4",
+        "id": "3acc07f2.13e4f8",
         "type": "http request",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "Register User HTTP Request",
         "method": "POST",
         "ret": "txt",
         "url": "http://rest-api:3000/api/registerUser",
         "tls": "",
         "x": 560,
-        "y": 200,
+        "y": 320,
         "wires": [
             [
-                "97174517.83c658"
+                "21d4d936.75b1c6"
             ]
         ]
     },
     {
-        "id": "f23ae524.bc3aa8",
+        "id": "21f234c8.f4fe3c",
         "type": "function",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "Body / Headers",
         "func": "msg.payload = {\"adminName\": \"admin\", \"username\":\"user2\"};\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
-        "y": 200,
+        "y": 320,
         "wires": [
             [
-                "54328a52.b0dfe4"
+                "3acc07f2.13e4f8"
             ]
         ]
     },
     {
-        "id": "eea0c091.6358f",
+        "id": "9aed7304.0bade",
         "type": "inject",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "POST",
         "topic": "",
         "payload": "",
@@ -347,17 +399,17 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 130,
-        "y": 200,
+        "y": 320,
         "wires": [
             [
-                "f23ae524.bc3aa8"
+                "21f234c8.f4fe3c"
             ]
         ]
     },
     {
-        "id": "97174517.83c658",
+        "id": "21d4d936.75b1c6",
         "type": "debug",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -365,46 +417,46 @@
         "tostatus": false,
         "complete": "payload",
         "x": 790,
-        "y": 200,
+        "y": 320,
         "wires": []
     },
     {
-        "id": "3fa1e17b.0aa4de",
+        "id": "d3864ad1.abf498",
         "type": "http request",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "Register Sensor HTTP Request",
         "method": "POST",
         "ret": "txt",
         "url": "http://rest-api:3000/api/registerSensor",
         "tls": "",
         "x": 570,
-        "y": 300,
+        "y": 540,
         "wires": [
             [
-                "367ef485.a2f56c"
+                "c176dcb0.2b8e5"
             ]
         ]
     },
     {
-        "id": "16edd034.1b578",
+        "id": "1e11e3d9.68005c",
         "type": "function",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "Body / Headers",
         "func": "msg.payload = {\"username\": \"user2\", \"channel\":\"channel1\", \"smartcontract\":\"cc\", \"args\":{\"sensorID\": \"1\"} }\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
-        "y": 300,
+        "y": 540,
         "wires": [
             [
-                "3fa1e17b.0aa4de"
+                "d3864ad1.abf498"
             ]
         ]
     },
     {
-        "id": "62ffa498.04034c",
+        "id": "8891f68a.83e098",
         "type": "inject",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "POST",
         "topic": "",
         "payload": "",
@@ -414,17 +466,17 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 130,
-        "y": 300,
+        "y": 540,
         "wires": [
             [
-                "16edd034.1b578"
+                "1e11e3d9.68005c"
             ]
         ]
     },
     {
-        "id": "367ef485.a2f56c",
+        "id": "c176dcb0.2b8e5",
         "type": "debug",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -432,13 +484,13 @@
         "tostatus": false,
         "complete": "payload",
         "x": 790,
-        "y": 300,
+        "y": 540,
         "wires": []
     },
     {
-        "id": "464f0826.5695e8",
+        "id": "df0f172d.f12478",
         "type": "ui_toast",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "position": "top right",
         "displayTime": "1",
         "highlight": "",
@@ -452,19 +504,19 @@
         "wires": []
     },
     {
-        "id": "85f887ec.0c8df8",
+        "id": "a1ff9f7f.6ab84",
         "type": "comment",
-        "z": "e1f1ce9e.cd563",
-        "name": "Sensor A",
+        "z": "5ac076f7.807208",
+        "name": "Sensor 1",
         "info": "",
         "x": 100,
         "y": 40,
         "wires": []
     },
     {
-        "id": "abf502d0.d9e4c",
+        "id": "499d866f.90c548",
         "type": "data-generator",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "",
         "field": "payload",
         "fieldType": "msg",
@@ -474,14 +526,14 @@
         "y": 200,
         "wires": [
             [
-                "8e600835.d4d138"
+                "c2627303.dc7c8"
             ]
         ]
     },
     {
-        "id": "3f24d823.136f88",
+        "id": "a30bbc5.9b7d24",
         "type": "inject",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "",
         "topic": "",
         "payload": "",
@@ -494,14 +546,14 @@
         "y": 200,
         "wires": [
             [
-                "abf502d0.d9e4c"
+                "499d866f.90c548"
             ]
         ]
     },
     {
-        "id": "8e600835.d4d138",
+        "id": "c2627303.dc7c8",
         "type": "json",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "",
         "property": "payload",
         "action": "",
@@ -510,22 +562,22 @@
         "y": 200,
         "wires": [
             [
-                "ee3bbebf.10309",
-                "7f6ed27e.cffe9c"
+                "8c416c88.9b3f3",
+                "e25b1847.942268"
             ]
         ]
     },
     {
-        "id": "ee3bbebf.10309",
+        "id": "8c416c88.9b3f3",
         "type": "ui_gauge",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "",
         "group": "fdad0cfd.dd9c2",
         "order": 1,
         "width": "6",
         "height": "6",
         "gtype": "gage",
-        "title": "Temperature A",
+        "title": "Sensor 1",
         "label": "°C",
         "format": "{{msg.payload.d.ambientTemp}}",
         "min": 0,
@@ -537,14 +589,14 @@
         ],
         "seg1": "",
         "seg2": "",
-        "x": 640,
+        "x": 620,
         "y": 200,
         "wires": []
     },
     {
-        "id": "3b10f8b7.5beb58",
+        "id": "6908544e.edd18c",
         "type": "function",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "Body / Headers",
         "func": "temp = msg.payload.d.ambientTemp;\n\nvar date = new Date();\nvar options = { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };\nvar time = date.toLocaleDateString('tr-TR', options);\n\n\nmsg.payload = {'username':'user2','channel':'channel1', 'smartcontract':'cc', 'args': {'sensorID':'2', 'temp':temp,'time':time} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
@@ -553,14 +605,14 @@
         "y": 420,
         "wires": [
             [
-                "fead5369.2a75d"
+                "50538bce.0499e4"
             ]
         ]
     },
     {
-        "id": "71291f48.933e9",
+        "id": "dff1f275.917e2",
         "type": "debug",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -572,9 +624,9 @@
         "wires": []
     },
     {
-        "id": "fead5369.2a75d",
+        "id": "50538bce.0499e4",
         "type": "http request",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "Add Temperature HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -584,15 +636,15 @@
         "y": 420,
         "wires": [
             [
-                "71291f48.933e9",
-                "e13fb4dd.963e48"
+                "dff1f275.917e2",
+                "f0631eff.91dde"
             ]
         ]
     },
     {
-        "id": "e13fb4dd.963e48",
+        "id": "f0631eff.91dde",
         "type": "ui_toast",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "position": "top right",
         "displayTime": "1",
         "highlight": "",
@@ -606,9 +658,9 @@
         "wires": []
     },
     {
-        "id": "97372111.b45b8",
+        "id": "eec755e.aa741a8",
         "type": "data-generator",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "",
         "field": "payload",
         "fieldType": "msg",
@@ -618,14 +670,14 @@
         "y": 520,
         "wires": [
             [
-                "c907a1a3.e80e7"
+                "7a88ca13.c5e2b4"
             ]
         ]
     },
     {
-        "id": "8fe807f4.316a28",
+        "id": "7dc4b307.198b0c",
         "type": "inject",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "",
         "topic": "",
         "payload": "",
@@ -638,14 +690,14 @@
         "y": 520,
         "wires": [
             [
-                "97372111.b45b8"
+                "eec755e.aa741a8"
             ]
         ]
     },
     {
-        "id": "c907a1a3.e80e7",
+        "id": "7a88ca13.c5e2b4",
         "type": "json",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "",
         "property": "payload",
         "action": "",
@@ -654,22 +706,22 @@
         "y": 520,
         "wires": [
             [
-                "61d0164f.1d5698",
-                "3b10f8b7.5beb58"
+                "482a9a9f.8595c4",
+                "6908544e.edd18c"
             ]
         ]
     },
     {
-        "id": "61d0164f.1d5698",
+        "id": "482a9a9f.8595c4",
         "type": "ui_gauge",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "",
         "group": "fdad0cfd.dd9c2",
         "order": 1,
         "width": "6",
         "height": "6",
         "gtype": "gage",
-        "title": "Temperature B",
+        "title": "Sensor 2",
         "label": "°C",
         "format": "{{msg.payload.d.ambientTemp}}",
         "min": 0,
@@ -681,154 +733,77 @@
         ],
         "seg1": "",
         "seg2": "",
-        "x": 640,
+        "x": 620,
         "y": 520,
         "wires": []
     },
     {
-        "id": "e106de93.c1733",
+        "id": "5010bcc6.15d954",
         "type": "comment",
-        "z": "e1f1ce9e.cd563",
-        "name": "Sensor B",
+        "z": "5ac076f7.807208",
+        "name": "Sensor 2",
         "info": "",
         "x": 100,
         "y": 360,
         "wires": []
     },
     {
-        "id": "dea79ebd.0384c",
+        "id": "3634bc5c.e6f754",
         "type": "comment",
-        "z": "3e6a1931.551c96",
-        "name": "Sensor A",
-        "info": "",
-        "x": 120,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "a76f7531.f4e678",
-        "type": "comment",
-        "z": "3e6a1931.551c96",
-        "name": "Sensor B",
-        "info": "",
-        "x": 120,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "f686d51e.a57dd8",
-        "type": "http request",
-        "z": "3e6a1931.551c96",
-        "name": "Register Sensor HTTP Request",
-        "method": "POST",
-        "ret": "txt",
-        "url": "http://rest-api:3000/api/registerSensor",
-        "tls": "",
-        "x": 570,
-        "y": 420,
-        "wires": [
-            [
-                "9d3a9ba2.869c88"
-            ]
-        ]
-    },
-    {
-        "id": "ec44437b.6f52f",
-        "type": "function",
-        "z": "3e6a1931.551c96",
-        "name": "Body / Headers",
-        "func": "msg.payload = {\"username\": \"user2\", \"channel\":\"channel1\", \"smartcontract\":\"cc\", \"args\":{\"sensorID\": \"2\"} }\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 320,
-        "y": 420,
-        "wires": [
-            [
-                "f686d51e.a57dd8"
-            ]
-        ]
-    },
-    {
-        "id": "a06f1575.baad78",
-        "type": "inject",
-        "z": "3e6a1931.551c96",
-        "name": "POST",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 130,
-        "y": 420,
-        "wires": [
-            [
-                "ec44437b.6f52f"
-            ]
-        ]
-    },
-    {
-        "id": "9d3a9ba2.869c88",
-        "type": "debug",
-        "z": "3e6a1931.551c96",
-        "name": "Result",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "x": 790,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "1860f04b.525f3",
-        "type": "comment",
-        "z": "3e6a1931.551c96",
-        "name": "Sensor C",
+        "z": "46d4aaf3.b99c74",
+        "name": "Sensor 1",
         "info": "",
         "x": 120,
         "y": 500,
         "wires": []
     },
     {
-        "id": "88652c1a.f5a58",
+        "id": "3fa7a6b3.c782ba",
+        "type": "comment",
+        "z": "46d4aaf3.b99c74",
+        "name": "Sensor 2",
+        "info": "",
+        "x": 120,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "c425e39b.a9d58",
         "type": "http request",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "Register Sensor HTTP Request",
         "method": "POST",
         "ret": "txt",
         "url": "http://rest-api:3000/api/registerSensor",
         "tls": "",
         "x": 570,
-        "y": 540,
+        "y": 660,
         "wires": [
             [
-                "6ca1a6af.330f68"
+                "47c270cd.c7b8d"
             ]
         ]
     },
     {
-        "id": "d5e1088b.f358e8",
+        "id": "e20e9a33.373738",
         "type": "function",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "Body / Headers",
-        "func": "msg.payload = {\"username\": \"user2\", \"channel\":\"channel1\", \"smartcontract\":\"cc\", \"args\":{\"sensorID\": \"3\"} }\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
+        "func": "msg.payload = {\"username\": \"user2\", \"channel\":\"channel1\", \"smartcontract\":\"cc\", \"args\":{\"sensorID\": \"2\"} }\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
-        "y": 540,
+        "y": 660,
         "wires": [
             [
-                "88652c1a.f5a58"
+                "c425e39b.a9d58"
             ]
         ]
     },
     {
-        "id": "ee0f6b67.28b298",
+        "id": "c34b47ca.fd0f48",
         "type": "inject",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "POST",
         "topic": "",
         "payload": "",
@@ -838,17 +813,17 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 130,
-        "y": 540,
+        "y": 660,
         "wires": [
             [
-                "d5e1088b.f358e8"
+                "e20e9a33.373738"
             ]
         ]
     },
     {
-        "id": "6ca1a6af.330f68",
+        "id": "47c270cd.c7b8d",
         "type": "debug",
-        "z": "3e6a1931.551c96",
+        "z": "46d4aaf3.b99c74",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -856,13 +831,90 @@
         "tostatus": false,
         "complete": "payload",
         "x": 790,
-        "y": 540,
+        "y": 660,
         "wires": []
     },
     {
-        "id": "d1cfe0a6.f1086",
+        "id": "509bf03.fc8ae1",
+        "type": "comment",
+        "z": "46d4aaf3.b99c74",
+        "name": "Sensor 3",
+        "info": "",
+        "x": 120,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "4b6fc413.fce5ac",
         "type": "http request",
-        "z": "a6a40467.0c7cf8",
+        "z": "46d4aaf3.b99c74",
+        "name": "Register Sensor HTTP Request",
+        "method": "POST",
+        "ret": "txt",
+        "url": "http://rest-api:3000/api/registerSensor",
+        "tls": "",
+        "x": 570,
+        "y": 780,
+        "wires": [
+            [
+                "6fc50964.d33448"
+            ]
+        ]
+    },
+    {
+        "id": "54324835.53f5b8",
+        "type": "function",
+        "z": "46d4aaf3.b99c74",
+        "name": "Body / Headers",
+        "func": "msg.payload = {\"username\": \"user2\", \"channel\":\"channel1\", \"smartcontract\":\"cc\", \"args\":{\"sensorID\": \"3\"} }\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 780,
+        "wires": [
+            [
+                "4b6fc413.fce5ac"
+            ]
+        ]
+    },
+    {
+        "id": "89d6532d.8dcb1",
+        "type": "inject",
+        "z": "46d4aaf3.b99c74",
+        "name": "POST",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 780,
+        "wires": [
+            [
+                "54324835.53f5b8"
+            ]
+        ]
+    },
+    {
+        "id": "6fc50964.d33448",
+        "type": "debug",
+        "z": "46d4aaf3.b99c74",
+        "name": "Result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 790,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "b59df2a7.681a",
+        "type": "http request",
+        "z": "43b7df1b.991e9",
         "name": "Get History HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -872,14 +924,14 @@
         "y": 120,
         "wires": [
             [
-                "c02572fa.d6af7"
+                "77b53f5c.639df"
             ]
         ]
     },
     {
-        "id": "c02572fa.d6af7",
+        "id": "77b53f5c.639df",
         "type": "json",
-        "z": "a6a40467.0c7cf8",
+        "z": "43b7df1b.991e9",
         "name": "JSON to Object",
         "property": "payload",
         "action": "",
@@ -888,15 +940,15 @@
         "y": 120,
         "wires": [
             [
-                "798094d1.5a9bfc",
-                "441cf5fc.2e813c"
+                "d0534425.277e58",
+                "182faf80.7adfd1"
             ]
         ]
     },
     {
-        "id": "798094d1.5a9bfc",
+        "id": "d0534425.277e58",
         "type": "debug",
-        "z": "a6a40467.0c7cf8",
+        "z": "43b7df1b.991e9",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -908,9 +960,9 @@
         "wires": []
     },
     {
-        "id": "441cf5fc.2e813c",
+        "id": "182faf80.7adfd1",
         "type": "template",
-        "z": "a6a40467.0c7cf8",
+        "z": "43b7df1b.991e9",
         "name": "Template",
         "field": "style",
         "fieldType": "msg",
@@ -921,14 +973,14 @@
         "y": 180,
         "wires": [
             [
-                "e49ab402.384188"
+                "ef23e92e.404a18"
             ]
         ]
     },
     {
-        "id": "a1885d38.86bd3",
+        "id": "601bcd51.6e6894",
         "type": "function",
-        "z": "a6a40467.0c7cf8",
+        "z": "43b7df1b.991e9",
         "name": "Body / Headers",
         "func": "msg.payload = {'username':'user2','channel':'channel1', 'smartcontract':'cc', \"args\": {\"startID\":\"0\", \"endID\":\"999\"} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
@@ -937,15 +989,15 @@
         "y": 120,
         "wires": [
             [
-                "d1cfe0a6.f1086"
+                "b59df2a7.681a"
             ]
         ]
     },
     {
-        "id": "e49ab402.384188",
+        "id": "ef23e92e.404a18",
         "type": "ui_template",
-        "z": "a6a40467.0c7cf8",
-        "group": "46aa02ba.2d710c",
+        "z": "43b7df1b.991e9",
+        "group": "72652ac0.352764",
         "name": "Table",
         "order": 1,
         "width": "12",
@@ -961,11 +1013,11 @@
         ]
     },
     {
-        "id": "f9097378.3e687",
+        "id": "4a17dd8b.1564c4",
         "type": "ui_button",
-        "z": "a6a40467.0c7cf8",
+        "z": "43b7df1b.991e9",
         "name": "",
-        "group": "46aa02ba.2d710c",
+        "group": "72652ac0.352764",
         "order": 1,
         "width": "0",
         "height": "0",
@@ -982,96 +1034,96 @@
         "y": 120,
         "wires": [
             [
-                "a1885d38.86bd3"
+                "601bcd51.6e6894"
             ]
         ]
     },
     {
-        "id": "35f41251.99c39e",
+        "id": "5b22dffc.d250c",
         "type": "http request",
-        "z": "bd1a651f.1d5b68",
+        "z": "8e2121ed.3798e",
         "name": "Get History HTTP Request",
         "method": "POST",
         "ret": "txt",
         "url": "http://rest-api:3000/api/getHistory",
         "tls": "",
-        "x": 520,
-        "y": 100,
+        "x": 540,
+        "y": 180,
         "wires": [
             [
-                "b33e30ff.d3311"
+                "15c6a80a.d17f38"
             ]
         ]
     },
     {
-        "id": "b33e30ff.d3311",
+        "id": "15c6a80a.d17f38",
         "type": "json",
-        "z": "bd1a651f.1d5b68",
+        "z": "8e2121ed.3798e",
         "name": "JSON to Object",
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 760,
-        "y": 100,
+        "x": 780,
+        "y": 180,
         "wires": [
             [
-                "905cf22d.9ccaa",
-                "6f6df898.aee9b8"
+                "4cd1fe05.1e8b",
+                "69e6ec62.7946f4"
             ]
         ]
     },
     {
-        "id": "905cf22d.9ccaa",
+        "id": "4cd1fe05.1e8b",
         "type": "debug",
-        "z": "bd1a651f.1d5b68",
+        "z": "8e2121ed.3798e",
         "name": "Result",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "payload",
-        "x": 930,
-        "y": 100,
+        "x": 950,
+        "y": 180,
         "wires": []
     },
     {
-        "id": "6f6df898.aee9b8",
+        "id": "69e6ec62.7946f4",
         "type": "template",
-        "z": "bd1a651f.1d5b68",
+        "z": "8e2121ed.3798e",
         "name": "Template",
         "field": "style",
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
         "template": "table {\n    color: #333;\n    font-family: Helvetica, Arial, sans-serif;\n    width: 100%;\n    border-collapse: collapse;\n    border-spacing: 0;\n}\ntd, th {\n    border: 1px solid transparent;\n    /* No more visible border */\n    height: 30px;\n    transition: all 0.3s;\n    /* Simple transition for hover effect */\n}\nth {\n    background: #DFDFDF;\n    /* Darken header a bit */\n    font-weight: bold;\n}\ntd {\n    background: #FAFAFA;\n    text-align: center;\n}\n\n/* Cells in even rows (2,4,6...) are one color */\n\ntr:nth-child(even) td {\n    background: #F1F1F1;\n}\n\n/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */\n\ntr:nth-child(odd) td {\n    background: #FEFEFE;\n}\ntr td:hover {\n    background: #666;\n    color: #FFF;\n}\n\n/* Hover cell effect! */",
-        "x": 760,
-        "y": 160,
+        "x": 780,
+        "y": 240,
         "wires": [
             [
-                "495930e1.cf74d"
+                "f0b64752.edc138"
             ]
         ]
     },
     {
-        "id": "2de37fa6.7631a",
+        "id": "26299c07.171024",
         "type": "function",
-        "z": "bd1a651f.1d5b68",
+        "z": "8e2121ed.3798e",
         "name": "Body / Headers",
         "func": "msg.payload = {'username':'user2','channel':'channel1', 'smartcontract':'cc', \"args\": {\"sensorID\":\"1\"} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 280,
-        "y": 100,
+        "x": 300,
+        "y": 180,
         "wires": [
             [
-                "35f41251.99c39e"
+                "5b22dffc.d250c"
             ]
         ]
     },
     {
-        "id": "143634ae.5cef7b",
+        "id": "7ff0cc60.ff4704",
         "type": "ui_button",
-        "z": "bd1a651f.1d5b68",
+        "z": "8e2121ed.3798e",
         "name": "",
         "group": "5721af64.a940a",
         "order": 1,
@@ -1086,37 +1138,37 @@
         "payload": "",
         "payloadType": "str",
         "topic": "",
-        "x": 90,
-        "y": 100,
+        "x": 110,
+        "y": 180,
         "wires": [
             [
-                "2de37fa6.7631a"
+                "26299c07.171024"
             ]
         ]
     },
     {
-        "id": "495930e1.cf74d",
+        "id": "f0b64752.edc138",
         "type": "ui_template",
-        "z": "bd1a651f.1d5b68",
+        "z": "8e2121ed.3798e",
         "group": "5721af64.a940a",
         "name": "Table",
-        "order": 1,
+        "order": 2,
         "width": "20",
         "height": "20",
         "format": "<style>\n    {{msg.style}}\n</style>\n\n<table>\n  <thead>\n    <tr>\n      <th scope=\"col\">TxId</th>\n      <th scope=\"col\">SensorID</th>\n      <th scope=\"col\">Time</th>\n      <th scope=\"col\">Temp</th>\n      <th scope=\"col\">Outlier</th>\n      <th scope=\"col\">Stuck-at Fault</th>\n      <th scope=\"col\">Spatial Correlation Fault</th>\n      <th scope=\"col\">Final Temperature</th>\n    </tr>\n  </thead>\n  \n  <tr ng-repeat=\"obj in msg.payload\">\n    <td>{{ obj.TxId }}</td>\n    <td>{{ obj.Value.sensorID }}</td>\n    <td>{{ obj.Value.time }}</td>\n    <td>{{ obj.Value.temp }}</td>\n    <td>{{ obj.Value.outlier }}</td>\n    <td>{{ obj.Value.stuckatfault }}</td>\n    <td>{{ obj.Value.scfault }}</td>\n    <td>{{ obj.Value.finaltemp }}</td>\n  </tr>\n</table>",
         "storeOutMessages": false,
         "fwdInMessages": true,
         "templateScope": "local",
-        "x": 930,
-        "y": 160,
+        "x": 950,
+        "y": 240,
         "wires": [
             []
         ]
     },
     {
-        "id": "ffb40345.b69f5",
+        "id": "6e1cf14.4725a1",
         "type": "function",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "Body / Headers",
         "func": "temp = msg.payload.d.ambientTemp;\n\nvar date = new Date();\nvar options = { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };\nvar time = date.toLocaleDateString('tr-TR', options);\n\n\nmsg.payload = {'username':'user2','channel':'channel1', 'smartcontract':'cc', 'args': {'sensorID':'3', 'temp':temp,'time':time} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
         "outputs": 1,
@@ -1125,14 +1177,14 @@
         "y": 720,
         "wires": [
             [
-                "def8d27d.b0801"
+                "7681dd09.4984c4"
             ]
         ]
     },
     {
-        "id": "1f8b1d53.ad6053",
+        "id": "f4006804.bb3668",
         "type": "debug",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "Result",
         "active": true,
         "tosidebar": true,
@@ -1144,9 +1196,9 @@
         "wires": []
     },
     {
-        "id": "def8d27d.b0801",
+        "id": "7681dd09.4984c4",
         "type": "http request",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "Add Temperature HTTP Request",
         "method": "POST",
         "ret": "txt",
@@ -1156,15 +1208,15 @@
         "y": 720,
         "wires": [
             [
-                "1f8b1d53.ad6053",
-                "f5bd1469.a7ba78"
+                "f4006804.bb3668",
+                "42e2c381.838cdc"
             ]
         ]
     },
     {
-        "id": "f5bd1469.a7ba78",
+        "id": "42e2c381.838cdc",
         "type": "ui_toast",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "position": "top right",
         "displayTime": "1",
         "highlight": "",
@@ -1178,9 +1230,9 @@
         "wires": []
     },
     {
-        "id": "78c145a.8c038bc",
+        "id": "3efe0215.fb0f6e",
         "type": "data-generator",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "",
         "field": "payload",
         "fieldType": "msg",
@@ -1190,14 +1242,14 @@
         "y": 820,
         "wires": [
             [
-                "6fdd00d8.d9d42"
+                "89159a24.01e9e8"
             ]
         ]
     },
     {
-        "id": "475cded.84f3b2",
+        "id": "a62eabb4.be7998",
         "type": "inject",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "",
         "topic": "",
         "payload": "",
@@ -1210,14 +1262,14 @@
         "y": 820,
         "wires": [
             [
-                "78c145a.8c038bc"
+                "3efe0215.fb0f6e"
             ]
         ]
     },
     {
-        "id": "6fdd00d8.d9d42",
+        "id": "89159a24.01e9e8",
         "type": "json",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "",
         "property": "payload",
         "action": "",
@@ -1226,22 +1278,22 @@
         "y": 820,
         "wires": [
             [
-                "58480a68.699d24",
-                "ffb40345.b69f5"
+                "6fa1f481.c6035c",
+                "6e1cf14.4725a1"
             ]
         ]
     },
     {
-        "id": "58480a68.699d24",
+        "id": "6fa1f481.c6035c",
         "type": "ui_gauge",
-        "z": "e1f1ce9e.cd563",
+        "z": "5ac076f7.807208",
         "name": "",
         "group": "fdad0cfd.dd9c2",
         "order": 1,
         "width": "6",
         "height": "6",
         "gtype": "gage",
-        "title": "Temperature C",
+        "title": "Sensor 3",
         "label": "°C",
         "format": "{{msg.payload.d.ambientTemp}}",
         "min": 0,
@@ -1253,18 +1305,332 @@
         ],
         "seg1": "",
         "seg2": "",
-        "x": 640,
+        "x": 620,
         "y": 820,
         "wires": []
     },
     {
-        "id": "4428a2e8.373e5c",
+        "id": "812136cf.a93518",
         "type": "comment",
-        "z": "e1f1ce9e.cd563",
-        "name": "Sensor C",
+        "z": "5ac076f7.807208",
+        "name": "Sensor 3",
         "info": "",
         "x": 100,
         "y": 660,
+        "wires": []
+    },
+    {
+        "id": "b919998b.6f2a08",
+        "type": "comment",
+        "z": "46d4aaf3.b99c74",
+        "name": "USER REGISTRATION",
+        "info": "",
+        "x": 160,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "393ab25e.2b1eee",
+        "type": "comment",
+        "z": "46d4aaf3.b99c74",
+        "name": "ADMIN REGISTRATION",
+        "info": "",
+        "x": 160,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "8383a202.c9ce1",
+        "type": "comment",
+        "z": "46d4aaf3.b99c74",
+        "name": "SENSOR REGISTRATION",
+        "info": "",
+        "x": 170,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "429c8958.157988",
+        "type": "http request",
+        "z": "8e2121ed.3798e",
+        "name": "Get History HTTP Request",
+        "method": "POST",
+        "ret": "txt",
+        "url": "http://rest-api:3000/api/getHistory",
+        "tls": "",
+        "x": 540,
+        "y": 440,
+        "wires": [
+            [
+                "bcc4b9c3.6587e8"
+            ]
+        ]
+    },
+    {
+        "id": "bcc4b9c3.6587e8",
+        "type": "json",
+        "z": "8e2121ed.3798e",
+        "name": "JSON to Object",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 780,
+        "y": 440,
+        "wires": [
+            [
+                "ea47d028.54f7a",
+                "efb5a572.7e1a18"
+            ]
+        ]
+    },
+    {
+        "id": "ea47d028.54f7a",
+        "type": "debug",
+        "z": "8e2121ed.3798e",
+        "name": "Result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 950,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "efb5a572.7e1a18",
+        "type": "template",
+        "z": "8e2121ed.3798e",
+        "name": "Template",
+        "field": "style",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "table {\n    color: #333;\n    font-family: Helvetica, Arial, sans-serif;\n    width: 100%;\n    border-collapse: collapse;\n    border-spacing: 0;\n}\ntd, th {\n    border: 1px solid transparent;\n    /* No more visible border */\n    height: 30px;\n    transition: all 0.3s;\n    /* Simple transition for hover effect */\n}\nth {\n    background: #DFDFDF;\n    /* Darken header a bit */\n    font-weight: bold;\n}\ntd {\n    background: #FAFAFA;\n    text-align: center;\n}\n\n/* Cells in even rows (2,4,6...) are one color */\n\ntr:nth-child(even) td {\n    background: #F1F1F1;\n}\n\n/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */\n\ntr:nth-child(odd) td {\n    background: #FEFEFE;\n}\ntr td:hover {\n    background: #666;\n    color: #FFF;\n}\n\n/* Hover cell effect! */",
+        "x": 780,
+        "y": 500,
+        "wires": [
+            [
+                "d6d88934.1ad4d8"
+            ]
+        ]
+    },
+    {
+        "id": "a095dd4b.2ebfc",
+        "type": "function",
+        "z": "8e2121ed.3798e",
+        "name": "Body / Headers",
+        "func": "msg.payload = {'username':'user2','channel':'channel1', 'smartcontract':'cc', \"args\": {\"sensorID\":\"2\"} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 300,
+        "y": 440,
+        "wires": [
+            [
+                "429c8958.157988"
+            ]
+        ]
+    },
+    {
+        "id": "d6d88934.1ad4d8",
+        "type": "ui_template",
+        "z": "8e2121ed.3798e",
+        "group": "3012c9a.0738036",
+        "name": "Table",
+        "order": 2,
+        "width": "20",
+        "height": "20",
+        "format": "<style>\n    {{msg.style}}\n</style>\n\n<table>\n  <thead>\n    <tr>\n      <th scope=\"col\">TxId</th>\n      <th scope=\"col\">SensorID</th>\n      <th scope=\"col\">Time</th>\n      <th scope=\"col\">Temp</th>\n      <th scope=\"col\">Outlier</th>\n      <th scope=\"col\">Stuck-at Fault</th>\n      <th scope=\"col\">Spatial Correlation Fault</th>\n      <th scope=\"col\">Final Temperature</th>\n    </tr>\n  </thead>\n  \n  <tr ng-repeat=\"obj in msg.payload\">\n    <td>{{ obj.TxId }}</td>\n    <td>{{ obj.Value.sensorID }}</td>\n    <td>{{ obj.Value.time }}</td>\n    <td>{{ obj.Value.temp }}</td>\n    <td>{{ obj.Value.outlier }}</td>\n    <td>{{ obj.Value.stuckatfault }}</td>\n    <td>{{ obj.Value.scfault }}</td>\n    <td>{{ obj.Value.finaltemp }}</td>\n  </tr>\n</table>",
+        "storeOutMessages": false,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 950,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "270958a3.616638",
+        "type": "ui_button",
+        "z": "8e2121ed.3798e",
+        "name": "",
+        "group": "3012c9a.0738036",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "label": "Get History",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 110,
+        "y": 440,
+        "wires": [
+            [
+                "a095dd4b.2ebfc"
+            ]
+        ]
+    },
+    {
+        "id": "8ec2d7b4.a0f1e8",
+        "type": "http request",
+        "z": "8e2121ed.3798e",
+        "name": "Get History HTTP Request",
+        "method": "POST",
+        "ret": "txt",
+        "url": "http://rest-api:3000/api/getHistory",
+        "tls": "",
+        "x": 540,
+        "y": 680,
+        "wires": [
+            [
+                "1d8307c2.1e20a8"
+            ]
+        ]
+    },
+    {
+        "id": "1d8307c2.1e20a8",
+        "type": "json",
+        "z": "8e2121ed.3798e",
+        "name": "JSON to Object",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 780,
+        "y": 680,
+        "wires": [
+            [
+                "8d85063d.fbbac8",
+                "9a319014.d582"
+            ]
+        ]
+    },
+    {
+        "id": "8d85063d.fbbac8",
+        "type": "debug",
+        "z": "8e2121ed.3798e",
+        "name": "Result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 950,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "9a319014.d582",
+        "type": "template",
+        "z": "8e2121ed.3798e",
+        "name": "Template",
+        "field": "style",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "table {\n    color: #333;\n    font-family: Helvetica, Arial, sans-serif;\n    width: 100%;\n    border-collapse: collapse;\n    border-spacing: 0;\n}\ntd, th {\n    border: 1px solid transparent;\n    /* No more visible border */\n    height: 30px;\n    transition: all 0.3s;\n    /* Simple transition for hover effect */\n}\nth {\n    background: #DFDFDF;\n    /* Darken header a bit */\n    font-weight: bold;\n}\ntd {\n    background: #FAFAFA;\n    text-align: center;\n}\n\n/* Cells in even rows (2,4,6...) are one color */\n\ntr:nth-child(even) td {\n    background: #F1F1F1;\n}\n\n/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */\n\ntr:nth-child(odd) td {\n    background: #FEFEFE;\n}\ntr td:hover {\n    background: #666;\n    color: #FFF;\n}\n\n/* Hover cell effect! */",
+        "x": 780,
+        "y": 740,
+        "wires": [
+            [
+                "f0502842.b9c8c8"
+            ]
+        ]
+    },
+    {
+        "id": "4b34dcb9.b54df4",
+        "type": "function",
+        "z": "8e2121ed.3798e",
+        "name": "Body / Headers",
+        "func": "msg.payload = {'username':'user2','channel':'channel1', 'smartcontract':'cc', \"args\": {\"sensorID\":\"3\"} };\nmsg.headers = {'content-type':'application/json'};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 300,
+        "y": 680,
+        "wires": [
+            [
+                "8ec2d7b4.a0f1e8"
+            ]
+        ]
+    },
+    {
+        "id": "f0502842.b9c8c8",
+        "type": "ui_template",
+        "z": "8e2121ed.3798e",
+        "group": "9784e13b.d623a",
+        "name": "Table",
+        "order": 2,
+        "width": "20",
+        "height": "20",
+        "format": "<style>\n    {{msg.style}}\n</style>\n\n<table>\n  <thead>\n    <tr>\n      <th scope=\"col\">TxId</th>\n      <th scope=\"col\">SensorID</th>\n      <th scope=\"col\">Time</th>\n      <th scope=\"col\">Temp</th>\n      <th scope=\"col\">Outlier</th>\n      <th scope=\"col\">Stuck-at Fault</th>\n      <th scope=\"col\">Spatial Correlation Fault</th>\n      <th scope=\"col\">Final Temperature</th>\n    </tr>\n  </thead>\n  \n  <tr ng-repeat=\"obj in msg.payload\">\n    <td>{{ obj.TxId }}</td>\n    <td>{{ obj.Value.sensorID }}</td>\n    <td>{{ obj.Value.time }}</td>\n    <td>{{ obj.Value.temp }}</td>\n    <td>{{ obj.Value.outlier }}</td>\n    <td>{{ obj.Value.stuckatfault }}</td>\n    <td>{{ obj.Value.scfault }}</td>\n    <td>{{ obj.Value.finaltemp }}</td>\n  </tr>\n</table>",
+        "storeOutMessages": false,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 950,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b1213c14.da098",
+        "type": "ui_button",
+        "z": "8e2121ed.3798e",
+        "name": "",
+        "group": "9784e13b.d623a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Get History",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 110,
+        "y": 680,
+        "wires": [
+            [
+                "4b34dcb9.b54df4"
+            ]
+        ]
+    },
+    {
+        "id": "fe387096.fe42f",
+        "type": "comment",
+        "z": "8e2121ed.3798e",
+        "name": "Sensor 1",
+        "info": "",
+        "x": 100,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ee626a10.27cd18",
+        "type": "comment",
+        "z": "8e2121ed.3798e",
+        "name": "Sensor 2",
+        "info": "",
+        "x": 100,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "2165f8f1.8f1338",
+        "type": "comment",
+        "z": "8e2121ed.3798e",
+        "name": "Sensor 3",
+        "info": "",
+        "x": 100,
+        "y": 620,
         "wires": []
     }
 ]
